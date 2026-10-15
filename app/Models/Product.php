@@ -1,0 +1,5 @@
+<?php
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+class Product extends Model { use SoftDeletes; protected $fillable=['user_id','category_id','type','title','description','item_condition','expired_at','seller_price','pickup_address','pickup_latitude','pickup_longitude','pickup_area_id','pickup_area_label','weight_gram','market_price','system_price','ai_confidence','status']; protected function casts():array{return ['expired_at'=>'date','seller_price'=>'decimal:2','pickup_latitude'=>'decimal:7','pickup_longitude'=>'decimal:7','weight_gram'=>'integer','market_price'=>'decimal:2','system_price'=>'decimal:2'];} public function user(){return $this->belongsTo(User::class);} public function category(){return $this->belongsTo(Category::class);} public function images(){return $this->hasMany(ProductImage::class);} public function analysisLogs(){return $this->hasMany(AiAnalysisLog::class);} public function orders(){return $this->hasMany(Order::class);} }

@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<codeBook version="2.5" ID="IDN_2021_RTFP_v02_M" xml-lang="en" xmlns="ddi:codebook:2_5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="ddi:codebook:2_5 https://ddialliance.org/Specification/DDI-Codebook/2.5/XMLSchema/codebook.xsd">
+<docDscr>
+  <citation>
+    <titlStmt>
+      <IDNo></IDNo>
+      <titl></titl>
+    </titlStmt>
+    <prodStmt>
+      <producer></producer>
+      <prodDate date="">
+        <_value></_value>
+      </prodDate>
+      <software version="v5">NADA</software>
+    </prodStmt>
+    <verStmt>
+      <version></version>
+    </verStmt>
+  </citation>
+</docDscr>
+<stdyDscr>
+  <citation>
+    <titlStmt>
+      <titl>Monthly food price estimates by product and market</titl>
+      <subTitl>Indonesia, 214 markets, 2007/01/01-2024/01/01, version 2024-01-23</subTitl>
+      <altTitl>Real Time Food Prices</altTitl>
+      <parTitl/>
+      <IDNo>IDN_2021_RTFP_v02_M</IDNo>
+    </titlStmt>
+    <rspStmt>
+      <AuthEnty affiliation="World Bank, Development Data Group (DECDG), Data Analytics and Tools unit (DECAT)">Bo Pieter Johannes Andrée</AuthEnty>
+      <othId role="Source of market price data" affiliation="United Nations" email="">
+        <p>World Food Programme (WFP)</p>
+      </othId>
+      <othId role="Source of market price data" affiliation="United Nations" email="">
+        <p>Food and Agriculture Organization (FAO)</p>
+      </othId>
+    </rspStmt>
+    <prodStmt>
+      <copyright/>
+      <software version="beta" date="2024-02-01">MetadataEditor</software>
+      <prodDate/>
+      <prodPlac/>
+      <fundAg abbr="" role="Support to data analytics">Foreign, Commonwealth &amp; Development Office</fundAg>
+      <fundAg abbr="" role="Data documentation and dissemination (FCV Data Platform)">Foreign, Commonwealth &amp; Development Office</fundAg>
+      <fundAg abbr="" role="Support to methodological development in low data regions">Department of Foreign Affairs and Trade</fundAg>
+      <fundAg abbr="" role="Support to methodological development in low data regions">Department of Foreign Affairs and Trade</fundAg>
+      <fundAg abbr="" role="Expansion of coverage and maintenance">Federal Ministry for Economic Cooperation and Development as part of the World Bank’s Food Systems 2030 Multi-Donor Trust Fund</fundAg>
+      <fundAg abbr="" role="Expansion of coverage and maintenance">Federal Ministry for Economic Cooperation and Development as part of the World Bank’s Food Systems 2030 Multi-Donor Trust Fund</fundAg>
+      <grantNo/>
+      <grantNo>KP-P174529-KMCE-TF0B4149</grantNo>
+      <grantNo>TF0B6892</grantNo>
+      <grantNo>TF0B6579</grantNo>
+      <grantNo>TF073570</grantNo>
+      <grantNo>TF0C0728</grantNo>
+    </prodStmt>
+    <distStmt>
+      <depDate date=""/>
+      <distDate date=""/>
+    </distStmt>
+    <serStmt>
+      <serName>Monthly food price estimates in fragile countries</serName>
+      <serInfo><![CDATA[Real Time Prices (RTP) is a live dataset compiled and updated weekly by the World Bank Development Economics Data Group (DECDG) using a combination of direct price measurement and Machine Learning estimation of missing price data. The historical and current estimates are based on price information gathered from the World Food Program (WFP), UN-Food and Agricultural Organization (FAO), select National Statistical Offices, and are continually updated and revised as more price information becomes available. Real-time exchange rate data used in this process are from official and public sources.
+      
+RTP consists of three sub-series, Real Time Food Prices (RTFP) includes prices on a variety of food items that primarily include country-specific staple foods, Real Time Energy Prices (RTEP) includes fuel prices, and Real Time Exchange Rates (RTFX) and includes unofficial exchange rate estimates as well as possible other unofficial deflators.
+ - RTFP: https://microdata.worldbank.org/index.php/catalog/study/WLD_2021_RTFP_v02_M 
+ - RTEP: https://microdata.worldbank.org/index.php/catalog/study/WLD_2023_RTEP_v01_M 
+ - RTFX: https://microdata.worldbank.org/index.php/catalog/study/WLD_2023_RTFX_v01_M 
+ 
+To produce smooth price series, outliers in the data are often adjusted using non-parametric density estimation and other techniques. Generalized Auto-Regressive Conditional Heteroskedasticity models are used to estimate intra-month price ranges. These models allow for excess kurtosis using a Generalized Error Distribution (GED). Open, High, Low, and Close price estimates are provided based on the modeled time-varying price distributions.
+      
+Data are produced from 2007 to the present and estimates are given for individual commodity items at geo-referenced market locations. Predicted data for missing entries are based on exchange rates, and price data available either at other market locations or from related price items.
+      
+RTP estimates of historical and current prices may serve as proxies for sub-national price inflation series or substitute national-level Consumer Price Inflation (CPI) indicators when complete information is unavailable. Therefore, RTP data may differ from other sources with official data, including the World Bank’s International Comparison Program (ICP) or inflation series reported in the World Development Indicators.
+      
+The following datasets are part of this sub-series: 
+
+ Country-level inflation: 
+ - All countries: https://microdata.worldbank.org/index.php/catalog/study/WLD_2021_RTFP-CTRY_v02_M 
+
+ Market-level estimates: 
+ - All countries: https://microdata.worldbank.org/index.php/catalog/study/WLD_2021_RTFP_v02_M 
+ - Afghanistan: https://microdata.worldbank.org/index.php/catalog/study/AFG_2021_RTFP_v02_M 
+ - Armenia: https://microdata.worldbank.org/index.php/catalog/study/ARM_2021_RTFP_v02_M 
+ - Bangladesh: https://microdata.worldbank.org/index.php/catalog/study/BGD_2021_RTFP_v02_M 
+ - Burkina Faso: https://microdata.worldbank.org/index.php/catalog/study/BFA_2021_RTFP_v02_M 
+ - Burundi: https://microdata.worldbank.org/index.php/catalog/study/BDI_2021_RTFP_v02_M 
+ - Cameroon: https://microdata.worldbank.org/index.php/catalog/study/CMR_2021_RTFP_v02_M 
+ - Central African Republic: https://microdata.worldbank.org/index.php/catalog/study/CAF_2021_RTFP_v02_M 
+ - Chad: https://microdata.worldbank.org/index.php/catalog/study/TCD_2021_RTFP_v02_M 
+ - Congo, Dem. Rep.: https://microdata.worldbank.org/index.php/catalog/study/COD_2021_RTFP_v02_M 
+ - Congo, Rep.: https://microdata.worldbank.org/index.php/catalog/study/COG_2021_RTFP_v02_M 
+ - Gambia, The: https://microdata.worldbank.org/index.php/catalog/study/GMB_2021_RTFP_v02_M 
+ - Guinea: https://microdata.worldbank.org/index.php/catalog/study/GIN_2021_RTFP_v02_M 
+ - Guinea-Bissau: https://microdata.worldbank.org/index.php/catalog/study/GNB_2021_RTFP_v02_M 
+ - Haiti: https://microdata.worldbank.org/index.php/catalog/study/HTI_2021_RTFP_v02_M 
+ - Indonesia: https://microdata.worldbank.org/index.php/catalog/study/IDN_2021_RTFP_v02_M 
+ - Iraq: https://microdata.worldbank.org/index.php/catalog/study/IRQ_2021_RTFP_v02_M 
+ - Kenya: https://microdata.worldbank.org/index.php/catalog/study/KEN_2021_RTFP_v02_M 
+ - Lao PDR: https://microdata.worldbank.org/index.php/catalog/study/LAO_2021_RTFP_v02_M 
+ - Lebanon: https://microdata.worldbank.org/index.php/catalog/study/LBN_2021_RTFP_v02_M 
+ - Liberia: https://microdata.worldbank.org/index.php/catalog/study/LBR_2021_RTFP_v02_M 
+ - Libya: https://microdata.worldbank.org/index.php/catalog/study/LBY_2021_RTFP_v02_M 
+ - Malawi: https://microdata.worldbank.org/index.php/catalog/study/MWI_2021_RTFP_v02_M 
+ - Mali: https://microdata.worldbank.org/index.php/catalog/study/MLI_2021_RTFP_v02_M 
+ - Mauritania: https://microdata.worldbank.org/index.php/catalog/study/MRT_2021_RTFP_v02_M 
+ - Mozambique: https://microdata.worldbank.org/index.php/catalog/study/MOZ_2021_RTFP_v02_M 
+ - Myanmar: https://microdata.worldbank.org/index.php/catalog/study/MMR_2021_RTFP_v02_M 
+ - Niger: https://microdata.worldbank.org/index.php/catalog/study/NER_2021_RTFP_v02_M 
+ - Nigeria: https://microdata.worldbank.org/index.php/catalog/study/NGA_2021_RTFP_v02_M 
+ - Philippines: https://microdata.worldbank.org/index.php/catalog/study/PHL_2021_RTFP_v02_M 
+ - Senegal: https://microdata.worldbank.org/index.php/catalog/study/SEN_2021_RTFP_v02_M 
+ - Somalia: https://microdata.worldbank.org/index.php/catalog/study/SOM_2021_RTFP_v02_M 
+ - South Sudan: https://microdata.worldbank.org/index.php/catalog/study/SSD_2021_RTFP_v02_M 
+ - Sri Lanka: https://microdata.worldbank.org/index.php/catalog/study/LKA_2021_RTFP_v02_M 
+ - Sudan: https://microdata.worldbank.org/index.php/catalog/study/SDN_2021_RTFP_v02_M 
+ - Syrian Arab Republic: https://microdata.worldbank.org/index.php/catalog/study/SYR_2021_RTFP_v02_M 
+ - Yemen, Rep.: https://microdata.worldbank.org/index.php/catalog/study/YEM_2021_RTFP_v02_M 
+]]></serInfo>
+    </serStmt>
+    <verStmt>
+      <version date="2024/01/23"/>
+      <verResp>FCV Data Platform</verResp>
+      <notes><![CDATA[]]></notes>
+    </verStmt>
+    <biblCit format=""><![CDATA[]]></biblCit>
+    <notes><![CDATA[]]></notes>
+  </citation>
+  <studyAuthorization date="">
+    <authorizationStatement><![CDATA[]]></authorizationStatement>
+  </studyAuthorization>
+  <stdyInfo>
+    <studyBudget><![CDATA[]]></studyBudget>
+    <subject>
+      <keyword vocab="" vocabURI="">Food Price Monitor</keyword>
+      <keyword vocab="" vocabURI="">FPM</keyword>
+      <keyword vocab="" vocabURI="">Real Time Food Prices</keyword>
+      <keyword vocab="" vocabURI="">RTFP</keyword>
+      <keyword vocab="" vocabURI="">Inflation</keyword>
+      <keyword vocab="" vocabURI="">Food Price Inflation</keyword>
+      <keyword vocab="" vocabURI="">Food security</keyword>
+      <keyword vocab="" vocabURI="">Food Insecurity</keyword>
+      <keyword vocab="" vocabURI="">Food Crisis</keyword>
+      <keyword vocab="" vocabURI="">Famine</keyword>
+      <keyword vocab="" vocabURI="">Fragility</keyword>
+      <keyword vocab="" vocabURI="">FCS</keyword>
+      <keyword vocab="" vocabURI="">FCV</keyword>
+      <keyword vocab="" vocabURI="">Food Price Crisis</keyword>
+      <keyword vocab="" vocabURI="">Commodity prices</keyword>
+      <keyword vocab="" vocabURI="">Maize</keyword>
+      <keyword vocab="" vocabURI="">Sorghum</keyword>
+      <keyword vocab="" vocabURI="">Wheat</keyword>
+      <keyword vocab="" vocabURI="">Rice</keyword>
+      <keyword vocab="" vocabURI="">Agricultural prices</keyword>
+      <keyword vocab="" vocabURI="">Food prices</keyword>
+      <keyword vocab="" vocabURI="">Real Time Food Prices</keyword>
+      <keyword vocab="" vocabURI="">Price measurement</keyword>
+      <keyword vocab="" vocabURI="">Real-time exchange rate data</keyword>
+      <keyword vocab="" vocabURI="">Commodity items</keyword>
+      <keyword vocab="" vocabURI="">Geo-referenced market locations</keyword>
+      <keyword vocab="" vocabURI="">Sub-national price inflation series</keyword>
+      <keyword vocab="" vocabURI="">Consumer Price Inflation (CPI)</keyword>
+      <keyword vocab="" vocabURI="">National-level CPI indicators</keyword>
+      <keyword vocab="" vocabURI="">International Comparison Program (ICP)</keyword>
+      <keyword vocab="" vocabURI="">Inflation series</keyword>
+      <keyword vocab="" vocabURI="">Market prices</keyword>
+      <keyword vocab="" vocabURI="">Price analysis</keyword>
+      <keyword vocab="" vocabURI="">Real-time data</keyword>
+      <keyword vocab="" vocabURI="">National prices</keyword>
+      <keyword vocab="" vocabURI="">International prices</keyword>
+      <keyword vocab="" vocabURI="">Price fluctuations</keyword>
+      <keyword vocab="" vocabURI="">Price trends</keyword>
+      <keyword vocab="" vocabURI="">Price Volatility</keyword>
+      <keyword vocab="" vocabURI="">Indonesia</keyword>
+    </subject>
+    <abstract><![CDATA[Food price inflation is an important metric to inform economic policy but traditional sources of consumer prices are often produced with delay during crises and only at an aggregate level. This may poorly reflect the actual price trends in rural or poverty-stricken areas, where large populations reside in fragile situations. 
+                    This data set includes food price estimates and is intended to help gain insight in price developments beyond what can be formally measured by traditional methods. The estimates are generated using a machine-learning approach that imputes ongoing subnational price surveys, often with accuracy similar to direct measurement of prices. The data set provides new opportunities to investigate local price dynamics in areas where populations are sensitive to localized price shocks and where traditional data are not available.
+                    
+                    A dataset of monthly food price inflation estimates (aggregated for all food products available in the data) is also available for all countries covered by this modeling exercise.]]></abstract>
+    <sumDscr>
+      <timePrd date="2007/01/01" event="start" cycle=""/>
+      <timePrd date="2024/01/01" event="end" cycle=""/>
+      <collDate date="2007/01/01" event="start" cycle=""/>
+      <collDate date="2024/01/01" event="end" cycle=""/>
+      <nation abbr="IDN">Indonesia</nation>
+      <geogCover/>
+      <geogCoverNote>The data cover the following sub-national areas: SULAWESI UTARA, SUMATERA UTARA, KALIMANTAN UTARA, JAWA BARAT, NUSA TENGGARA BARAT, NUSA TENGGARA TIMUR, SULAWESI SELATAN, JAMBI, JAWA TIMUR, KALIMANTAN SELATAN, BALI, BANTEN, JAWA TENGAH, RIAU, SUMATERA BARAT, KEPULAUAN RIAU, PAPUA, SULAWESI BARAT, BENGKULU, MALUKU UTARA, DAERAH ISTIMEWA YOGYAKARTA, KALIMANTAN BARAT, KALIMANTAN TENGAH, PAPUA BARAT, SUMATERA SELATAN, MALUKU, KEPULAUAN BANGKA BELITUNG, ACEH, DKI JAKARTA, SULAWESI TENGGARA, KALIMANTAN TIMUR, LAMPUNG, GORONTALO, SULAWESI TENGAH, Market Average</geogCoverNote>
+      <geogUnit>Sub-national level, Admin 2 (selected)</geogUnit>
+      <anlyUnit><![CDATA[]]></anlyUnit>
+      <universe><![CDATA[]]></universe>
+      <dataKind/>
+    </sumDscr>
+    <qualityStatement>
+      <standardsCompliance>
+        <complianceDescription/>
+      </standardsCompliance>
+      <otherQualityStatement/>
+    </qualityStatement>
+    <notes><![CDATA[List of food products included in estimates (not all products are included in country-level estimates): chili, eggs, garlic, meat beef, meat chicken, meat chicken broiler, oil, onions, rice, sugar]]></notes>
+    <exPostEvaluation completionDate="" type="">
+      <evaluationProcess/>
+      <outcomes/>
+    </exPostEvaluation>
+  </stdyInfo>
+  <method>
+    <dataColl>
+      <timeMeth/>
+      <frequenc/>
+      <sampProc><![CDATA[]]></sampProc>
+      <sampleFrame>
+        <sampleFrameName/>
+        <custodian/>
+        <universe/>
+        <frameUnit isPrimary="">
+          <unitType numberOfUnits=""/>
+        </frameUnit>
+        <updateProcedure/>
+      </sampleFrame>
+      <deviat/>
+      <resInstru><![CDATA[]]></resInstru>
+      <instrumentDevelopment type=""/>
+      <sources>
+        <dataSrc>World Food Programme (WFP)</dataSrc>
+        <srcOrig>https://data.humdata.org/organization/wfp?vocab_Topics=prices</srcOrig>
+        <srcChar>World Food Programme (WFP); data published in the Humanitarian Data Exchange (HDX) data catalog at https://data.humdata.org/</srcChar>
+      </sources>
+      <sources>
+        <dataSrc>Food and Agriculture Organization (FAO)</dataSrc>
+        <srcOrig>https://fpma.fao.org/giews/fpmat4/#/dashboard/tool/domestic</srcOrig>
+        <srcChar>Local exchange rates and implied exchange rates data derived from commodity pairs published by FAO through the Food Price Monitoring and Analysis (FMPA) Tool</srcChar>
+      </sources>
+      <collSitu><![CDATA[]]></collSitu>
+      <actMin><![CDATA[]]></actMin>
+      <ConOps><![CDATA[]]></ConOps>
+      <weight><![CDATA[]]></weight>
+      <cleanOps><![CDATA[]]></cleanOps>
+    </dataColl>
+    <notes><![CDATA[]]></notes>
+    <anlyInfo>
+      <respRate><![CDATA[]]></respRate>
+      <EstSmpErr><![CDATA[]]></EstSmpErr>
+      <dataAppr><![CDATA[]]></dataAppr>
+    </anlyInfo>
+    <stdyClas><![CDATA[]]></stdyClas>
+  </method>
+  <dataAccs>
+    <setAvail>
+      <accsPlac URI="https://microdata.worldbank.org">World Bank Microdata Library, FCV Collection</accsPlac>
+      <origArch/>
+      <avlStatus/>
+      <collSize/>
+      <complete/>
+      <fileQnty/>
+      <notes><![CDATA[]]></notes>
+    </setAvail>
+    <useStmt>
+      <restrctn>The estimates presented in this dataset are all based on publicly-available data from the World Food Programme.
+          The dataset of price estimates is published as open data.</restrctn>
+      <contact affiliation="World Bank, Development Data Group" URI="https://datahelpdesk.worldbank.org/" email="">Data Help Desk</contact>
+      <citReq><![CDATA[Please cite this dataset as follows: Andrée, B. P. J. (2021). Monthly food price estimates by product and market (Version 2024-01-23). IDN_2021_RTFP_v02_M. Washington, DC: World Bank Microdata Library. https://doi.org/10.48529/2ZH0-JF55]]></citReq>
+      <deposReq><![CDATA[]]></deposReq>
+      <conditions><![CDATA[]]></conditions>
+      <disclaimer><![CDATA[The RTFP data and metadata provided are &quot;as is&quot; and &quot;as available,&quot; and every effort is made to ensure their timeliness, accuracy, and completeness. When errors are discovered, they are corrected as appropriate and feasible. For details on the terms and conditions for usage of the RTFP database, please refer to the license details.]]></disclaimer>
+    </useStmt>
+    <notes><![CDATA[]]></notes>
+  </dataAccs>
+  <notes><![CDATA[]]></notes>
+</stdyDscr>
+<fileDscr ID="IDN_2021_RTFP_MKT">
+  <fileTxt>
+    <fileName>IDN_RTFP_mkt_2007_2024-01-23.csv</fileName>
+    <fileCont>Monthly price estimates at market/commodity level (all available countries)</fileCont>
+    <dimensns>
+      <caseQnty>44075</caseQnty>
+      <varQnty>95</varQnty>
+    </dimensns>
+    <dataChck></dataChck>
+    <dataMsng></dataMsng>
+    <verStmt>
+      <version>2024/01/23</version>
+    </verStmt>
+  </fileTxt>
+  <notes></notes>
+</fileDscr>
+<dataDscr>
+<var ID="V001" name="ISO3" files="IDN_2021_RTFP_MKT">
+  <labl>Country code</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <txt>ISO3C codes, also known as ISO 3166-1 alpha-3 codes, are three-letter country or territory codes that are part of the ISO 3166 international standard. These codes are used to uniquely represent and identify countries and dependent territories in a standardized manner. Each ISO3C code corresponds to a specific country or territory and is often used in various applications, such as international trade, banking, internet domain names, and statistical analysis, to simplify and standardize country and territory references.</txt>
+</var>
+<var ID="V002" name="country" files="IDN_2021_RTFP_MKT">
+  <labl>Country</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>Country names follow their appearance in the World Bank World Development Indicators.</notes>
+</var>
+<var ID="V003" name="adm1_name" files="IDN_2021_RTFP_MKT">
+  <labl>Area name (admin. level 1)</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>Administrative names follow their appearance in the underlying data bases from the World Food Program, FAO and HDX and may be further simplified for better machine readability. As such, these names may differ from official names.</notes>
+</var>
+<var ID="V004" name="adm2_name" files="IDN_2021_RTFP_MKT">
+  <labl>Area name (admin. level 2)</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>Administrative names follow their appearance in the underlying data bases from the World Food Program, FAO and HDX and may be further simplified for better machine readability. As such, these names may differ from official names.</notes>
+</var>
+<var ID="V005" name="mkt_name" files="IDN_2021_RTFP_MKT">
+  <labl>Market name</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>The mkt_name variable represents the name of the market associated with each price data point in the dataset. This field provides a clear, textual identifier for each market location, offering a more intuitive and user-friendly way to reference and distinguish between different markets. The market name is crucial for qualitative analysis and for users familiar with regional market names, facilitating easy identification and comparison of market-specific trends and patterns. Market names follow their appearance in the underlying data bases from the World Food Program, FAO and HDX and may be further simplified for better machine readability. As such, these names may differ from official names. When analyzing market price data, geo_id helps in correlating price information with specific, named market locations, enhancing the contextual understanding of the data. Note that market names may change over time, market names may be shared between multiple geographic locations, and that multiple markets may share similar coordinates, while the geo_id is unique for each location.</notes>
+</var>
+<var ID="V006" name="lat" files="IDN_2021_RTFP_MKT">
+  <labl>Latitude</labl>
+  <sumStat type="Number of valid values">43870</sumStat>
+  <notes>Geographic positioning of the market location at which price data is tracked, expressed as a geographic coordinate that measure the east-west positioning on Earth relative to the Prime Meridian in Greenwich, England. Use the geo_id field to obtain a better understanding of unique market locations. Note that market names may change over time, market names may be shared between multiple geographic locations, and that multiple markets may share similar coordinates.</notes>
+</var>
+<var ID="V007" name="lon" files="IDN_2021_RTFP_MKT">
+  <labl>Longitude</labl>
+  <sumStat type="Number of valid values">43870</sumStat>
+  <notes>Geographic positioning of the market location at which price data is tracked, expressed as a geographic coordinate that measure the north-south positioning on Earth relative to the equator. Use the geo_id field to obtain a better understanding of unique market locations. Note that market names may change over time, market names may be shared between multiple geographic locations, and that multiple markets may share similar coordinates.</notes>
+</var>
+<var ID="V008" name="geo_id" files="IDN_2021_RTFP_MKT">
+  <labl>Market location identifier</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>The geo_id variable serves as a unique identifier for each market location in the RTP datasets, derived from geographic coordinates. This identifier is essential for accurately linking market price data to specific geographical locations. It ensures precise tracking and comparison of prices across different areas and is particularly useful for spatial analysis and mapping trends geographically. The uniqueness of each geo_id aids in the clear distinction and aggregation of data by location, making it a key element in any geographical or location-based analysis of market prices. The geo_id is shared across Real Time Food Prices (RTFP), Real Time Energy Prices (RTEP) and Real Time Exchange Rates (RTFP) that share the same timestamp (RTP data are generated weekly, they share the same timestamp when they are in the same week). The geo_id may be used to link data sets from different time periods, but caution is recommended. Use also the mkt_name field and Longitude and Latitude to obtain a better understanding of the market location, while noting that market names may change over time, market names may be shared between multiple locations, or multiple markets may share similar coordinates.</notes>
+</var>
+<var ID="V009" name="year" files="IDN_2021_RTFP_MKT">
+  <labl>Year</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>The year variable represents the year associated with each market price data point, provided in numerical format (e.g., 2023). This field is allows segmenting and analyzing the price data on an annual basis.</notes>
+</var>
+<var ID="V010" name="month" files="IDN_2021_RTFP_MKT">
+  <labl>Month</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>The month variable indicates the month number (1-12) corresponding to each market price data point, presented in a numerical format. This field facilitates more granular temporal insights and may be used to calculate seasonal adjustments to inflation estimates by the user.</notes>
+</var>
+<var ID="V011" name="currency" files="IDN_2021_RTFP_MKT">
+  <labl>Currency</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>The currency variable specifies the currency unit in which each market price data point is denominated. This field is essential for ensuring accurate financial interpretation and comparison of market prices across different regions or countries. Note that all the data is in Local Currency Unit (LCU). In countries with multiple competing currencies, the currency with the highest response rate in the underlying price survey data is used. Note that for both Real Time Food Prices (RTFP) and Real Time Energy Prices (RTEP) the USD/LCU variable in Real Time Exchange Rates (RTFP) can be used to dollarize the country data using area-specific estimates of prevailing unofficial retail exchange rates.</notes>
+</var>
+<var ID="V012" name="components" files="IDN_2021_RTFP_MKT">
+  <labl>Components</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+</var>
+<var ID="V013" name="start_dense_data" files="IDN_2021_RTFP_MKT">
+  <labl>Start dense data</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+</var>
+<var ID="V014" name="last_survey_point" files="IDN_2021_RTFP_MKT">
+  <labl>Last survey point</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+</var>
+<var ID="V015" name="data_coverage" files="IDN_2021_RTFP_MKT">
+  <labl>Data coverage</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+</var>
+<var ID="V016" name="data_coverage_recent" files="IDN_2021_RTFP_MKT">
+  <labl>Data coverage recent</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+</var>
+<var ID="V017" name="index_confidence_score" files="IDN_2021_RTFP_MKT">
+  <labl>Index confidence score</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+</var>
+<var ID="V018" name="spatially_interpolated" files="IDN_2021_RTFP_MKT">
+  <labl>Spatial interpolation (0/1)</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>The spatially_interpolated variable is a binary indicator distinguishes between prices that are directly measured or estimated for a specific location at which prices are measured in other time periods, and those derived solely through spatial interpolation. When spatially_interpolated is set to true (or 1), it indicates that the price has been calculated using an inverse distance weighted interpolation method, based on data and estimates from nearby market locations. This is crucial for understanding the precision and context of each price point. The data is likely more accurate for the specific locations where data is or has been measured, while spatially interpolated prices provide estimations based only on surrounding data, useful for areas without direct measurements. This variable is key for assessing the reliability and geographical relevance of the price data.</notes>
+</var>
+<var ID="V019" name="chili" files="IDN_2021_RTFP_MKT">
+  <labl>Chili</labl>
+  <sumStat type="Number of valid values">6400</sumStat>
+</var>
+<var ID="V020" name="eggs" files="IDN_2021_RTFP_MKT">
+  <labl>Eggs</labl>
+  <sumStat type="Number of valid values">9725</sumStat>
+</var>
+<var ID="V021" name="garlic" files="IDN_2021_RTFP_MKT">
+  <labl>Garlic</labl>
+  <sumStat type="Number of valid values">9860</sumStat>
+</var>
+<var ID="V022" name="meat_beef" files="IDN_2021_RTFP_MKT">
+  <labl>Meat beef</labl>
+  <sumStat type="Number of valid values">5834</sumStat>
+</var>
+<var ID="V023" name="meat_chicken" files="IDN_2021_RTFP_MKT">
+  <labl>Meat chicken</labl>
+  <sumStat type="Number of valid values">6276</sumStat>
+</var>
+<var ID="V024" name="meat_chicken_broiler" files="IDN_2021_RTFP_MKT">
+  <labl>Meat chicken broiler</labl>
+  <sumStat type="Number of valid values">5858</sumStat>
+</var>
+<var ID="V025" name="oil" files="IDN_2021_RTFP_MKT">
+  <labl>Oil</labl>
+  <sumStat type="Number of valid values">9952</sumStat>
+</var>
+<var ID="V026" name="onions" files="IDN_2021_RTFP_MKT">
+  <labl>Onions</labl>
+  <sumStat type="Number of valid values">10024</sumStat>
+</var>
+<var ID="V027" name="rice" files="IDN_2021_RTFP_MKT">
+  <labl>Rice</labl>
+  <sumStat type="Number of valid values">9773</sumStat>
+</var>
+<var ID="V028" name="sugar" files="IDN_2021_RTFP_MKT">
+  <labl>Sugar</labl>
+  <sumStat type="Number of valid values">10057</sumStat>
+</var>
+<var ID="V029" name="o_chili" files="IDN_2021_RTFP_MKT">
+  <labl>Open estimate - Chili</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>o_chili indicates the monthly opening price estimate for the commodity chili. It represents the initial market price at the start of each month, crucial for analyzing the opening market sentiment and baseline valuation. In financial analysis, especially in OHLC (Open, High, Low, Close) objects, the opening price is key to understanding the initial market conditions. Open price estimates are estimated as conditional means using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads.</notes>
+</var>
+<var ID="V030" name="h_chili" files="IDN_2021_RTFP_MKT">
+  <labl>High estimate - Chili</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>h_chili denotes the highest price achieved by the commodity chili within a month. This data point captures market peaks, reflecting the maximum demand or valuation during the period. High price estimates are estimated as the expected value of the upper half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads. In candlestick charting, the high price is indicated by the upper shadow or wick, marking the top end of the price range. Understanding the highest price point helps analyze the monthly price spread and market volatility.</notes>
+</var>
+<var ID="V031" name="l_chili" files="IDN_2021_RTFP_MKT">
+  <labl>Low estimate - Chili</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>l_chili represents the lowest price point for the commodity chili in the given month. This variable is essential for understanding market dips, buyer interest at lower prices, and the floor value of the commodity. Low price estimates are estimated as the expected value of the lower half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. In candlestick charting, the low price forms the lower end of the candle or wick, showcasing the lowest market reach. Analyzing the low price is integral to understanding the full monthly price range and assessing market stability or distress.</notes>
+</var>
+<var ID="V032" name="c_chili" files="IDN_2021_RTFP_MKT">
+  <labl>Close estimate - Chili</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>c_chili is the closing price estimate for the commodity chili at the end of each month. This figure indicates the final market price as recorded in the underlying surveys or estimated contemporaneously based on the other recorded price data, reflecting the closing market sentiment and valuation after a month's trading activity. In candlestick charts, the closing price helps form the main body of the candle, indicating the final standing of the market. It is vital for evaluating the closing market conditions, final demand, and forming comparative analysis with the opening price to understand market dynamics over the month.</notes>
+</var>
+<var ID="V033" name="inflation_chili" files="IDN_2021_RTFP_MKT">
+  <labl>Inflation - Chili</labl>
+  <sumStat type="Number of valid values">41495</sumStat>
+  <notes>inflation_chili provides the 12-month inflation rate, or price change rate, for commodity chili. This metric is calculated by comparing the current price against the price from 12 months prior, giving an annualized percentage change. Inflation rates are crucial economic indicators, reflecting the purchasing power and cost of living changes. For a more comprehensive understanding of overall inflation, analyzing a basket of food items rather than single commodities is recommended, as it offers a broader perspective of general price trends. This data is instrumental in economic planning, policy making, and understanding the macroeconomic environment.</notes>
+</var>
+<var ID="V034" name="trust_chili" files="IDN_2021_RTFP_MKT">
+  <labl>Trust - Chili</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>trust_chili offers a trust score, ranging from 1-10, reflecting the reliability of the inflation calculation for chili. These scores are specific to each market, time period, and commodity, considering the data availability and accuracy for the preceding 12 months. Higher scores indicate greater confidence and robustness in the inflation figures, based on the quality and quantity of data used and the cross-validated accuracy of imputed data. This score is key for users to assess the credibility and dependability of the inflation data, aiding in more informed economic and financial analysis. A score of 10 corresponds to an entry for which up to 12 months of preceding data has been fully observed. Values below 6 highlight observations generated with extremely low confidence.</notes>
+</var>
+<var ID="V035" name="o_eggs" files="IDN_2021_RTFP_MKT">
+  <labl>Open estimate - Eggs</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>o_eggs indicates the monthly opening price estimate for the commodity eggs. It represents the initial market price at the start of each month, crucial for analyzing the opening market sentiment and baseline valuation. In financial analysis, especially in OHLC (Open, High, Low, Close) objects, the opening price is key to understanding the initial market conditions. Open price estimates are estimated as conditional means using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads.</notes>
+</var>
+<var ID="V036" name="h_eggs" files="IDN_2021_RTFP_MKT">
+  <labl>High estimate - Eggs</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>h_eggs denotes the highest price achieved by the commodity eggs within a month. This data point captures market peaks, reflecting the maximum demand or valuation during the period. High price estimates are estimated as the expected value of the upper half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads. In candlestick charting, the high price is indicated by the upper shadow or wick, marking the top end of the price range. Understanding the highest price point helps analyze the monthly price spread and market volatility.</notes>
+</var>
+<var ID="V037" name="l_eggs" files="IDN_2021_RTFP_MKT">
+  <labl>Low estimate - Eggs</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>l_eggs represents the lowest price point for the commodity eggs in the given month. This variable is essential for understanding market dips, buyer interest at lower prices, and the floor value of the commodity. Low price estimates are estimated as the expected value of the lower half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. In candlestick charting, the low price forms the lower end of the candle or wick, showcasing the lowest market reach. Analyzing the low price is integral to understanding the full monthly price range and assessing market stability or distress.</notes>
+</var>
+<var ID="V038" name="c_eggs" files="IDN_2021_RTFP_MKT">
+  <labl>Close estimate - Eggs</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>c_eggs is the closing price estimate for the commodity eggs at the end of each month. This figure indicates the final market price as recorded in the underlying surveys or estimated contemporaneously based on the other recorded price data, reflecting the closing market sentiment and valuation after a month's trading activity. In candlestick charts, the closing price helps form the main body of the candle, indicating the final standing of the market. It is vital for evaluating the closing market conditions, final demand, and forming comparative analysis with the opening price to understand market dynamics over the month.</notes>
+</var>
+<var ID="V039" name="inflation_eggs" files="IDN_2021_RTFP_MKT">
+  <labl>Inflation - Eggs</labl>
+  <sumStat type="Number of valid values">41495</sumStat>
+  <notes>inflation_eggs provides the 12-month inflation rate, or price change rate, for commodity eggs. This metric is calculated by comparing the current price against the price from 12 months prior, giving an annualized percentage change. Inflation rates are crucial economic indicators, reflecting the purchasing power and cost of living changes. For a more comprehensive understanding of overall inflation, analyzing a basket of food items rather than single commodities is recommended, as it offers a broader perspective of general price trends. This data is instrumental in economic planning, policy making, and understanding the macroeconomic environment.</notes>
+</var>
+<var ID="V040" name="trust_eggs" files="IDN_2021_RTFP_MKT">
+  <labl>Trust - Eggs</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>trust_eggs offers a trust score, ranging from 1-10, reflecting the reliability of the inflation calculation for eggs. These scores are specific to each market, time period, and commodity, considering the data availability and accuracy for the preceding 12 months. Higher scores indicate greater confidence and robustness in the inflation figures, based on the quality and quantity of data used and the cross-validated accuracy of imputed data. This score is key for users to assess the credibility and dependability of the inflation data, aiding in more informed economic and financial analysis. A score of 10 corresponds to an entry for which up to 12 months of preceding data has been fully observed. Values below 6 highlight observations generated with extremely low confidence.</notes>
+</var>
+<var ID="V041" name="o_garlic" files="IDN_2021_RTFP_MKT">
+  <labl>Open estimate - Garlic</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>o_garlic indicates the monthly opening price estimate for the commodity garlic. It represents the initial market price at the start of each month, crucial for analyzing the opening market sentiment and baseline valuation. In financial analysis, especially in OHLC (Open, High, Low, Close) objects, the opening price is key to understanding the initial market conditions. Open price estimates are estimated as conditional means using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads.</notes>
+</var>
+<var ID="V042" name="h_garlic" files="IDN_2021_RTFP_MKT">
+  <labl>High estimate - Garlic</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>h_garlic denotes the highest price achieved by the commodity garlic within a month. This data point captures market peaks, reflecting the maximum demand or valuation during the period. High price estimates are estimated as the expected value of the upper half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads. In candlestick charting, the high price is indicated by the upper shadow or wick, marking the top end of the price range. Understanding the highest price point helps analyze the monthly price spread and market volatility.</notes>
+</var>
+<var ID="V043" name="l_garlic" files="IDN_2021_RTFP_MKT">
+  <labl>Low estimate - Garlic</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>l_garlic represents the lowest price point for the commodity garlic in the given month. This variable is essential for understanding market dips, buyer interest at lower prices, and the floor value of the commodity. Low price estimates are estimated as the expected value of the lower half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. In candlestick charting, the low price forms the lower end of the candle or wick, showcasing the lowest market reach. Analyzing the low price is integral to understanding the full monthly price range and assessing market stability or distress.</notes>
+</var>
+<var ID="V044" name="c_garlic" files="IDN_2021_RTFP_MKT">
+  <labl>Close estimate - Garlic</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>c_garlic is the closing price estimate for the commodity garlic at the end of each month. This figure indicates the final market price as recorded in the underlying surveys or estimated contemporaneously based on the other recorded price data, reflecting the closing market sentiment and valuation after a month's trading activity. In candlestick charts, the closing price helps form the main body of the candle, indicating the final standing of the market. It is vital for evaluating the closing market conditions, final demand, and forming comparative analysis with the opening price to understand market dynamics over the month.</notes>
+</var>
+<var ID="V045" name="inflation_garlic" files="IDN_2021_RTFP_MKT">
+  <labl>Inflation - Garlic</labl>
+  <sumStat type="Number of valid values">41495</sumStat>
+  <notes>inflation_garlic provides the 12-month inflation rate, or price change rate, for commodity garlic. This metric is calculated by comparing the current price against the price from 12 months prior, giving an annualized percentage change. Inflation rates are crucial economic indicators, reflecting the purchasing power and cost of living changes. For a more comprehensive understanding of overall inflation, analyzing a basket of food items rather than single commodities is recommended, as it offers a broader perspective of general price trends. This data is instrumental in economic planning, policy making, and understanding the macroeconomic environment.</notes>
+</var>
+<var ID="V046" name="trust_garlic" files="IDN_2021_RTFP_MKT">
+  <labl>Trust - Garlic</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>trust_garlic offers a trust score, ranging from 1-10, reflecting the reliability of the inflation calculation for garlic. These scores are specific to each market, time period, and commodity, considering the data availability and accuracy for the preceding 12 months. Higher scores indicate greater confidence and robustness in the inflation figures, based on the quality and quantity of data used and the cross-validated accuracy of imputed data. This score is key for users to assess the credibility and dependability of the inflation data, aiding in more informed economic and financial analysis. A score of 10 corresponds to an entry for which up to 12 months of preceding data has been fully observed. Values below 6 highlight observations generated with extremely low confidence.</notes>
+</var>
+<var ID="V047" name="o_meat_beef" files="IDN_2021_RTFP_MKT">
+  <labl>Open estimate - Meat beef</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>o_meat_beef indicates the monthly opening price estimate for the commodity meat_beef. It represents the initial market price at the start of each month, crucial for analyzing the opening market sentiment and baseline valuation. In financial analysis, especially in OHLC (Open, High, Low, Close) objects, the opening price is key to understanding the initial market conditions. Open price estimates are estimated as conditional means using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads.</notes>
+</var>
+<var ID="V048" name="h_meat_beef" files="IDN_2021_RTFP_MKT">
+  <labl>High estimate - Meat beef</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>h_meat_beef denotes the highest price achieved by the commodity meat_beef within a month. This data point captures market peaks, reflecting the maximum demand or valuation during the period. High price estimates are estimated as the expected value of the upper half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads. In candlestick charting, the high price is indicated by the upper shadow or wick, marking the top end of the price range. Understanding the highest price point helps analyze the monthly price spread and market volatility.</notes>
+</var>
+<var ID="V049" name="l_meat_beef" files="IDN_2021_RTFP_MKT">
+  <labl>Low estimate - Meat beef</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>l_meat_beef represents the lowest price point for the commodity meat_beef in the given month. This variable is essential for understanding market dips, buyer interest at lower prices, and the floor value of the commodity. Low price estimates are estimated as the expected value of the lower half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. In candlestick charting, the low price forms the lower end of the candle or wick, showcasing the lowest market reach. Analyzing the low price is integral to understanding the full monthly price range and assessing market stability or distress.</notes>
+</var>
+<var ID="V050" name="c_meat_beef" files="IDN_2021_RTFP_MKT">
+  <labl>Close estimate - Meat beef</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>c_meat_beef is the closing price estimate for the commodity meat_beef at the end of each month. This figure indicates the final market price as recorded in the underlying surveys or estimated contemporaneously based on the other recorded price data, reflecting the closing market sentiment and valuation after a month's trading activity. In candlestick charts, the closing price helps form the main body of the candle, indicating the final standing of the market. It is vital for evaluating the closing market conditions, final demand, and forming comparative analysis with the opening price to understand market dynamics over the month.</notes>
+</var>
+<var ID="V051" name="inflation_meat_beef" files="IDN_2021_RTFP_MKT">
+  <labl>Inflation - Meat beef</labl>
+  <sumStat type="Number of valid values">41495</sumStat>
+  <notes>inflation_meat_beef provides the 12-month inflation rate, or price change rate, for commodity meat_beef. This metric is calculated by comparing the current price against the price from 12 months prior, giving an annualized percentage change. Inflation rates are crucial economic indicators, reflecting the purchasing power and cost of living changes. For a more comprehensive understanding of overall inflation, analyzing a basket of food items rather than single commodities is recommended, as it offers a broader perspective of general price trends. This data is instrumental in economic planning, policy making, and understanding the macroeconomic environment.</notes>
+</var>
+<var ID="V052" name="trust_meat_beef" files="IDN_2021_RTFP_MKT">
+  <labl>Trust - Meat beef</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>trust_meat_beef offers a trust score, ranging from 1-10, reflecting the reliability of the inflation calculation for meat_beef. These scores are specific to each market, time period, and commodity, considering the data availability and accuracy for the preceding 12 months. Higher scores indicate greater confidence and robustness in the inflation figures, based on the quality and quantity of data used and the cross-validated accuracy of imputed data. This score is key for users to assess the credibility and dependability of the inflation data, aiding in more informed economic and financial analysis. A score of 10 corresponds to an entry for which up to 12 months of preceding data has been fully observed. Values below 6 highlight observations generated with extremely low confidence.</notes>
+</var>
+<var ID="V053" name="o_meat_chicken" files="IDN_2021_RTFP_MKT">
+  <labl>Open estimate - Meat chicken</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>o_meat_chicken indicates the monthly opening price estimate for the commodity meat_chicken. It represents the initial market price at the start of each month, crucial for analyzing the opening market sentiment and baseline valuation. In financial analysis, especially in OHLC (Open, High, Low, Close) objects, the opening price is key to understanding the initial market conditions. Open price estimates are estimated as conditional means using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads.</notes>
+</var>
+<var ID="V054" name="h_meat_chicken" files="IDN_2021_RTFP_MKT">
+  <labl>High estimate - Meat chicken</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>h_meat_chicken denotes the highest price achieved by the commodity meat_chicken within a month. This data point captures market peaks, reflecting the maximum demand or valuation during the period. High price estimates are estimated as the expected value of the upper half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads. In candlestick charting, the high price is indicated by the upper shadow or wick, marking the top end of the price range. Understanding the highest price point helps analyze the monthly price spread and market volatility.</notes>
+</var>
+<var ID="V055" name="l_meat_chicken" files="IDN_2021_RTFP_MKT">
+  <labl>Low estimate - Meat chicken</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>l_meat_chicken represents the lowest price point for the commodity meat_chicken in the given month. This variable is essential for understanding market dips, buyer interest at lower prices, and the floor value of the commodity. Low price estimates are estimated as the expected value of the lower half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. In candlestick charting, the low price forms the lower end of the candle or wick, showcasing the lowest market reach. Analyzing the low price is integral to understanding the full monthly price range and assessing market stability or distress.</notes>
+</var>
+<var ID="V056" name="c_meat_chicken" files="IDN_2021_RTFP_MKT">
+  <labl>Close estimate - Meat chicken</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>c_meat_chicken is the closing price estimate for the commodity meat_chicken at the end of each month. This figure indicates the final market price as recorded in the underlying surveys or estimated contemporaneously based on the other recorded price data, reflecting the closing market sentiment and valuation after a month's trading activity. In candlestick charts, the closing price helps form the main body of the candle, indicating the final standing of the market. It is vital for evaluating the closing market conditions, final demand, and forming comparative analysis with the opening price to understand market dynamics over the month.</notes>
+</var>
+<var ID="V057" name="inflation_meat_chicken" files="IDN_2021_RTFP_MKT">
+  <labl>Inflation - Meat chicken</labl>
+  <sumStat type="Number of valid values">41495</sumStat>
+  <notes>inflation_meat_chicken provides the 12-month inflation rate, or price change rate, for commodity meat_chicken. This metric is calculated by comparing the current price against the price from 12 months prior, giving an annualized percentage change. Inflation rates are crucial economic indicators, reflecting the purchasing power and cost of living changes. For a more comprehensive understanding of overall inflation, analyzing a basket of food items rather than single commodities is recommended, as it offers a broader perspective of general price trends. This data is instrumental in economic planning, policy making, and understanding the macroeconomic environment.</notes>
+</var>
+<var ID="V058" name="trust_meat_chicken" files="IDN_2021_RTFP_MKT">
+  <labl>Trust - Meat chicken</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>trust_meat_chicken offers a trust score, ranging from 1-10, reflecting the reliability of the inflation calculation for meat_chicken. These scores are specific to each market, time period, and commodity, considering the data availability and accuracy for the preceding 12 months. Higher scores indicate greater confidence and robustness in the inflation figures, based on the quality and quantity of data used and the cross-validated accuracy of imputed data. This score is key for users to assess the credibility and dependability of the inflation data, aiding in more informed economic and financial analysis. A score of 10 corresponds to an entry for which up to 12 months of preceding data has been fully observed. Values below 6 highlight observations generated with extremely low confidence.</notes>
+</var>
+<var ID="V059" name="o_meat_chicken_broiler" files="IDN_2021_RTFP_MKT">
+  <labl>Open estimate - Meat chicken broiler</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>o_meat_chicken_broiler indicates the monthly opening price estimate for the commodity meat_chicken_broiler. It represents the initial market price at the start of each month, crucial for analyzing the opening market sentiment and baseline valuation. In financial analysis, especially in OHLC (Open, High, Low, Close) objects, the opening price is key to understanding the initial market conditions. Open price estimates are estimated as conditional means using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads.</notes>
+</var>
+<var ID="V060" name="h_meat_chicken_broiler" files="IDN_2021_RTFP_MKT">
+  <labl>High estimate - Meat chicken broiler</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>h_meat_chicken_broiler denotes the highest price achieved by the commodity meat_chicken_broiler within a month. This data point captures market peaks, reflecting the maximum demand or valuation during the period. High price estimates are estimated as the expected value of the upper half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads. In candlestick charting, the high price is indicated by the upper shadow or wick, marking the top end of the price range. Understanding the highest price point helps analyze the monthly price spread and market volatility.</notes>
+</var>
+<var ID="V061" name="l_meat_chicken_broiler" files="IDN_2021_RTFP_MKT">
+  <labl>Low estimate - Meat chicken broiler</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>l_meat_chicken_broiler represents the lowest price point for the commodity meat_chicken_broiler in the given month. This variable is essential for understanding market dips, buyer interest at lower prices, and the floor value of the commodity. Low price estimates are estimated as the expected value of the lower half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. In candlestick charting, the low price forms the lower end of the candle or wick, showcasing the lowest market reach. Analyzing the low price is integral to understanding the full monthly price range and assessing market stability or distress.</notes>
+</var>
+<var ID="V062" name="c_meat_chicken_broiler" files="IDN_2021_RTFP_MKT">
+  <labl>Close estimate - Meat chicken broiler</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>c_meat_chicken_broiler is the closing price estimate for the commodity meat_chicken_broiler at the end of each month. This figure indicates the final market price as recorded in the underlying surveys or estimated contemporaneously based on the other recorded price data, reflecting the closing market sentiment and valuation after a month's trading activity. In candlestick charts, the closing price helps form the main body of the candle, indicating the final standing of the market. It is vital for evaluating the closing market conditions, final demand, and forming comparative analysis with the opening price to understand market dynamics over the month.</notes>
+</var>
+<var ID="V063" name="inflation_meat_chicken_broiler" files="IDN_2021_RTFP_MKT">
+  <labl>Inflation - Meat chicken broiler</labl>
+  <sumStat type="Number of valid values">41495</sumStat>
+  <notes>inflation_meat_chicken_broiler provides the 12-month inflation rate, or price change rate, for commodity meat_chicken_broiler. This metric is calculated by comparing the current price against the price from 12 months prior, giving an annualized percentage change. Inflation rates are crucial economic indicators, reflecting the purchasing power and cost of living changes. For a more comprehensive understanding of overall inflation, analyzing a basket of food items rather than single commodities is recommended, as it offers a broader perspective of general price trends. This data is instrumental in economic planning, policy making, and understanding the macroeconomic environment.</notes>
+</var>
+<var ID="V064" name="trust_meat_chicken_broiler" files="IDN_2021_RTFP_MKT">
+  <labl>Trust - Meat chicken broiler</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>trust_meat_chicken_broiler offers a trust score, ranging from 1-10, reflecting the reliability of the inflation calculation for meat_chicken_broiler. These scores are specific to each market, time period, and commodity, considering the data availability and accuracy for the preceding 12 months. Higher scores indicate greater confidence and robustness in the inflation figures, based on the quality and quantity of data used and the cross-validated accuracy of imputed data. This score is key for users to assess the credibility and dependability of the inflation data, aiding in more informed economic and financial analysis. A score of 10 corresponds to an entry for which up to 12 months of preceding data has been fully observed. Values below 6 highlight observations generated with extremely low confidence.</notes>
+</var>
+<var ID="V065" name="o_oil" files="IDN_2021_RTFP_MKT">
+  <labl>Open estimate - Oil</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>o_oil indicates the monthly opening price estimate for the commodity oil. It represents the initial market price at the start of each month, crucial for analyzing the opening market sentiment and baseline valuation. In financial analysis, especially in OHLC (Open, High, Low, Close) objects, the opening price is key to understanding the initial market conditions. Open price estimates are estimated as conditional means using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads.</notes>
+</var>
+<var ID="V066" name="h_oil" files="IDN_2021_RTFP_MKT">
+  <labl>High estimate - Oil</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>h_oil denotes the highest price achieved by the commodity oil within a month. This data point captures market peaks, reflecting the maximum demand or valuation during the period. High price estimates are estimated as the expected value of the upper half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads. In candlestick charting, the high price is indicated by the upper shadow or wick, marking the top end of the price range. Understanding the highest price point helps analyze the monthly price spread and market volatility.</notes>
+</var>
+<var ID="V067" name="l_oil" files="IDN_2021_RTFP_MKT">
+  <labl>Low estimate - Oil</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>l_oil represents the lowest price point for the commodity oil in the given month. This variable is essential for understanding market dips, buyer interest at lower prices, and the floor value of the commodity. Low price estimates are estimated as the expected value of the lower half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. In candlestick charting, the low price forms the lower end of the candle or wick, showcasing the lowest market reach. Analyzing the low price is integral to understanding the full monthly price range and assessing market stability or distress.</notes>
+</var>
+<var ID="V068" name="c_oil" files="IDN_2021_RTFP_MKT">
+  <labl>Close estimate - Oil</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>c_oil is the closing price estimate for the commodity oil at the end of each month. This figure indicates the final market price as recorded in the underlying surveys or estimated contemporaneously based on the other recorded price data, reflecting the closing market sentiment and valuation after a month's trading activity. In candlestick charts, the closing price helps form the main body of the candle, indicating the final standing of the market. It is vital for evaluating the closing market conditions, final demand, and forming comparative analysis with the opening price to understand market dynamics over the month.</notes>
+</var>
+<var ID="V069" name="inflation_oil" files="IDN_2021_RTFP_MKT">
+  <labl>Inflation - Oil</labl>
+  <sumStat type="Number of valid values">41495</sumStat>
+  <notes>inflation_oil provides the 12-month inflation rate, or price change rate, for commodity oil. This metric is calculated by comparing the current price against the price from 12 months prior, giving an annualized percentage change. Inflation rates are crucial economic indicators, reflecting the purchasing power and cost of living changes. For a more comprehensive understanding of overall inflation, analyzing a basket of food items rather than single commodities is recommended, as it offers a broader perspective of general price trends. This data is instrumental in economic planning, policy making, and understanding the macroeconomic environment.</notes>
+</var>
+<var ID="V070" name="trust_oil" files="IDN_2021_RTFP_MKT">
+  <labl>Trust - Oil</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>trust_oil offers a trust score, ranging from 1-10, reflecting the reliability of the inflation calculation for oil. These scores are specific to each market, time period, and commodity, considering the data availability and accuracy for the preceding 12 months. Higher scores indicate greater confidence and robustness in the inflation figures, based on the quality and quantity of data used and the cross-validated accuracy of imputed data. This score is key for users to assess the credibility and dependability of the inflation data, aiding in more informed economic and financial analysis. A score of 10 corresponds to an entry for which up to 12 months of preceding data has been fully observed. Values below 6 highlight observations generated with extremely low confidence.</notes>
+</var>
+<var ID="V071" name="o_onions" files="IDN_2021_RTFP_MKT">
+  <labl>Open estimate - Onions</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>o_onions indicates the monthly opening price estimate for the commodity onions. It represents the initial market price at the start of each month, crucial for analyzing the opening market sentiment and baseline valuation. In financial analysis, especially in OHLC (Open, High, Low, Close) objects, the opening price is key to understanding the initial market conditions. Open price estimates are estimated as conditional means using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads.</notes>
+</var>
+<var ID="V072" name="h_onions" files="IDN_2021_RTFP_MKT">
+  <labl>High estimate - Onions</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>h_onions denotes the highest price achieved by the commodity onions within a month. This data point captures market peaks, reflecting the maximum demand or valuation during the period. High price estimates are estimated as the expected value of the upper half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads. In candlestick charting, the high price is indicated by the upper shadow or wick, marking the top end of the price range. Understanding the highest price point helps analyze the monthly price spread and market volatility.</notes>
+</var>
+<var ID="V073" name="l_onions" files="IDN_2021_RTFP_MKT">
+  <labl>Low estimate - Onions</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>l_onions represents the lowest price point for the commodity onions in the given month. This variable is essential for understanding market dips, buyer interest at lower prices, and the floor value of the commodity. Low price estimates are estimated as the expected value of the lower half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. In candlestick charting, the low price forms the lower end of the candle or wick, showcasing the lowest market reach. Analyzing the low price is integral to understanding the full monthly price range and assessing market stability or distress.</notes>
+</var>
+<var ID="V074" name="c_onions" files="IDN_2021_RTFP_MKT">
+  <labl>Close estimate - Onions</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>c_onions is the closing price estimate for the commodity onions at the end of each month. This figure indicates the final market price as recorded in the underlying surveys or estimated contemporaneously based on the other recorded price data, reflecting the closing market sentiment and valuation after a month's trading activity. In candlestick charts, the closing price helps form the main body of the candle, indicating the final standing of the market. It is vital for evaluating the closing market conditions, final demand, and forming comparative analysis with the opening price to understand market dynamics over the month.</notes>
+</var>
+<var ID="V075" name="inflation_onions" files="IDN_2021_RTFP_MKT">
+  <labl>Inflation - Onions</labl>
+  <sumStat type="Number of valid values">41495</sumStat>
+  <notes>inflation_onions provides the 12-month inflation rate, or price change rate, for commodity onions. This metric is calculated by comparing the current price against the price from 12 months prior, giving an annualized percentage change. Inflation rates are crucial economic indicators, reflecting the purchasing power and cost of living changes. For a more comprehensive understanding of overall inflation, analyzing a basket of food items rather than single commodities is recommended, as it offers a broader perspective of general price trends. This data is instrumental in economic planning, policy making, and understanding the macroeconomic environment.</notes>
+</var>
+<var ID="V076" name="trust_onions" files="IDN_2021_RTFP_MKT">
+  <labl>Trust - Onions</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>trust_onions offers a trust score, ranging from 1-10, reflecting the reliability of the inflation calculation for onions. These scores are specific to each market, time period, and commodity, considering the data availability and accuracy for the preceding 12 months. Higher scores indicate greater confidence and robustness in the inflation figures, based on the quality and quantity of data used and the cross-validated accuracy of imputed data. This score is key for users to assess the credibility and dependability of the inflation data, aiding in more informed economic and financial analysis. A score of 10 corresponds to an entry for which up to 12 months of preceding data has been fully observed. Values below 6 highlight observations generated with extremely low confidence.</notes>
+</var>
+<var ID="V077" name="o_rice" files="IDN_2021_RTFP_MKT">
+  <labl>Open estimate - Rice</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>o_rice indicates the monthly opening price estimate for the commodity rice. It represents the initial market price at the start of each month, crucial for analyzing the opening market sentiment and baseline valuation. In financial analysis, especially in OHLC (Open, High, Low, Close) objects, the opening price is key to understanding the initial market conditions. Open price estimates are estimated as conditional means using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads.</notes>
+</var>
+<var ID="V078" name="h_rice" files="IDN_2021_RTFP_MKT">
+  <labl>High estimate - Rice</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>h_rice denotes the highest price achieved by the commodity rice within a month. This data point captures market peaks, reflecting the maximum demand or valuation during the period. High price estimates are estimated as the expected value of the upper half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads. In candlestick charting, the high price is indicated by the upper shadow or wick, marking the top end of the price range. Understanding the highest price point helps analyze the monthly price spread and market volatility.</notes>
+</var>
+<var ID="V079" name="l_rice" files="IDN_2021_RTFP_MKT">
+  <labl>Low estimate - Rice</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>l_rice represents the lowest price point for the commodity rice in the given month. This variable is essential for understanding market dips, buyer interest at lower prices, and the floor value of the commodity. Low price estimates are estimated as the expected value of the lower half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. In candlestick charting, the low price forms the lower end of the candle or wick, showcasing the lowest market reach. Analyzing the low price is integral to understanding the full monthly price range and assessing market stability or distress.</notes>
+</var>
+<var ID="V080" name="c_rice" files="IDN_2021_RTFP_MKT">
+  <labl>Close estimate - Rice</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>c_rice is the closing price estimate for the commodity rice at the end of each month. This figure indicates the final market price as recorded in the underlying surveys or estimated contemporaneously based on the other recorded price data, reflecting the closing market sentiment and valuation after a month's trading activity. In candlestick charts, the closing price helps form the main body of the candle, indicating the final standing of the market. It is vital for evaluating the closing market conditions, final demand, and forming comparative analysis with the opening price to understand market dynamics over the month.</notes>
+</var>
+<var ID="V081" name="inflation_rice" files="IDN_2021_RTFP_MKT">
+  <labl>Inflation - Rice</labl>
+  <sumStat type="Number of valid values">41495</sumStat>
+  <notes>inflation_rice provides the 12-month inflation rate, or price change rate, for commodity rice. This metric is calculated by comparing the current price against the price from 12 months prior, giving an annualized percentage change. Inflation rates are crucial economic indicators, reflecting the purchasing power and cost of living changes. For a more comprehensive understanding of overall inflation, analyzing a basket of food items rather than single commodities is recommended, as it offers a broader perspective of general price trends. This data is instrumental in economic planning, policy making, and understanding the macroeconomic environment.</notes>
+</var>
+<var ID="V082" name="trust_rice" files="IDN_2021_RTFP_MKT">
+  <labl>Trust - Rice</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>trust_rice offers a trust score, ranging from 1-10, reflecting the reliability of the inflation calculation for rice. These scores are specific to each market, time period, and commodity, considering the data availability and accuracy for the preceding 12 months. Higher scores indicate greater confidence and robustness in the inflation figures, based on the quality and quantity of data used and the cross-validated accuracy of imputed data. This score is key for users to assess the credibility and dependability of the inflation data, aiding in more informed economic and financial analysis. A score of 10 corresponds to an entry for which up to 12 months of preceding data has been fully observed. Values below 6 highlight observations generated with extremely low confidence.</notes>
+</var>
+<var ID="V083" name="o_sugar" files="IDN_2021_RTFP_MKT">
+  <labl>Open estimate - Sugar</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>o_sugar indicates the monthly opening price estimate for the commodity sugar. It represents the initial market price at the start of each month, crucial for analyzing the opening market sentiment and baseline valuation. In financial analysis, especially in OHLC (Open, High, Low, Close) objects, the opening price is key to understanding the initial market conditions. Open price estimates are estimated as conditional means using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads.</notes>
+</var>
+<var ID="V084" name="h_sugar" files="IDN_2021_RTFP_MKT">
+  <labl>High estimate - Sugar</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>h_sugar denotes the highest price achieved by the commodity sugar within a month. This data point captures market peaks, reflecting the maximum demand or valuation during the period. High price estimates are estimated as the expected value of the upper half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads. In candlestick charting, the high price is indicated by the upper shadow or wick, marking the top end of the price range. Understanding the highest price point helps analyze the monthly price spread and market volatility.</notes>
+</var>
+<var ID="V085" name="l_sugar" files="IDN_2021_RTFP_MKT">
+  <labl>Low estimate - Sugar</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>l_sugar represents the lowest price point for the commodity sugar in the given month. This variable is essential for understanding market dips, buyer interest at lower prices, and the floor value of the commodity. Low price estimates are estimated as the expected value of the lower half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. In candlestick charting, the low price forms the lower end of the candle or wick, showcasing the lowest market reach. Analyzing the low price is integral to understanding the full monthly price range and assessing market stability or distress.</notes>
+</var>
+<var ID="V086" name="c_sugar" files="IDN_2021_RTFP_MKT">
+  <labl>Close estimate - Sugar</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>c_sugar is the closing price estimate for the commodity sugar at the end of each month. This figure indicates the final market price as recorded in the underlying surveys or estimated contemporaneously based on the other recorded price data, reflecting the closing market sentiment and valuation after a month's trading activity. In candlestick charts, the closing price helps form the main body of the candle, indicating the final standing of the market. It is vital for evaluating the closing market conditions, final demand, and forming comparative analysis with the opening price to understand market dynamics over the month.</notes>
+</var>
+<var ID="V087" name="inflation_sugar" files="IDN_2021_RTFP_MKT">
+  <labl>Inflation - Sugar</labl>
+  <sumStat type="Number of valid values">41495</sumStat>
+  <notes>inflation_sugar provides the 12-month inflation rate, or price change rate, for commodity sugar. This metric is calculated by comparing the current price against the price from 12 months prior, giving an annualized percentage change. Inflation rates are crucial economic indicators, reflecting the purchasing power and cost of living changes. For a more comprehensive understanding of overall inflation, analyzing a basket of food items rather than single commodities is recommended, as it offers a broader perspective of general price trends. This data is instrumental in economic planning, policy making, and understanding the macroeconomic environment.</notes>
+</var>
+<var ID="V088" name="trust_sugar" files="IDN_2021_RTFP_MKT">
+  <labl>Trust - Sugar</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>trust_sugar offers a trust score, ranging from 1-10, reflecting the reliability of the inflation calculation for sugar. These scores are specific to each market, time period, and commodity, considering the data availability and accuracy for the preceding 12 months. Higher scores indicate greater confidence and robustness in the inflation figures, based on the quality and quantity of data used and the cross-validated accuracy of imputed data. This score is key for users to assess the credibility and dependability of the inflation data, aiding in more informed economic and financial analysis. A score of 10 corresponds to an entry for which up to 12 months of preceding data has been fully observed. Values below 6 highlight observations generated with extremely low confidence.</notes>
+</var>
+<var ID="V089" name="o_food_price_index" files="IDN_2021_RTFP_MKT">
+  <labl>Open estimate - Food price index</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>o_food_price_index indicates the monthly opening price estimate for the commodity food_price_index. It represents the initial market price at the start of each month, crucial for analyzing the opening market sentiment and baseline valuation. In financial analysis, especially in OHLC (Open, High, Low, Close) objects, the opening price is key to understanding the initial market conditions. Open price estimates are estimated as conditional means using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads.</notes>
+</var>
+<var ID="V090" name="h_food_price_index" files="IDN_2021_RTFP_MKT">
+  <labl>High estimate - Food price index</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>h_food_price_index denotes the highest price achieved by the commodity food_price_index within a month. This data point captures market peaks, reflecting the maximum demand or valuation during the period. High price estimates are estimated as the expected value of the upper half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. These data points are instrumental in plotting the price data in candlestick charts, which are pivotal for visual market analysis and identifying potential price trends, intra-month price volatility, or observe trend reversals that are significant when contrasted to natural monthly price spreads. In candlestick charting, the high price is indicated by the upper shadow or wick, marking the top end of the price range. Understanding the highest price point helps analyze the monthly price spread and market volatility.</notes>
+</var>
+<var ID="V091" name="l_food_price_index" files="IDN_2021_RTFP_MKT">
+  <labl>Low estimate - Food price index</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>l_food_price_index represents the lowest price point for the commodity food_price_index in the given month. This variable is essential for understanding market dips, buyer interest at lower prices, and the floor value of the commodity. Low price estimates are estimated as the expected value of the lower half of the price distribution based on conditional variance estimated using a fractionally integrated GARCH (Generalized Autoregressive Heteroscedasticity) model estimated using a Generalized Error Distribution that allows for excess kurtosis. In candlestick charting, the low price forms the lower end of the candle or wick, showcasing the lowest market reach. Analyzing the low price is integral to understanding the full monthly price range and assessing market stability or distress.</notes>
+</var>
+<var ID="V092" name="c_food_price_index" files="IDN_2021_RTFP_MKT">
+  <labl>Close estimate - Food price index</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>c_food_price_index is the closing price estimate for the commodity food_price_index at the end of each month. This figure indicates the final market price as recorded in the underlying surveys or estimated contemporaneously based on the other recorded price data, reflecting the closing market sentiment and valuation after a month's trading activity. In candlestick charts, the closing price helps form the main body of the candle, indicating the final standing of the market. It is vital for evaluating the closing market conditions, final demand, and forming comparative analysis with the opening price to understand market dynamics over the month.</notes>
+</var>
+<var ID="V093" name="inflation_food_price_index" files="IDN_2021_RTFP_MKT">
+  <labl>Inflation - Food price index</labl>
+  <sumStat type="Number of valid values">41495</sumStat>
+  <notes>inflation_food_price_index provides the 12-month inflation rate, or price change rate, for commodity food_price_index. This metric is calculated by comparing the current price against the price from 12 months prior, giving an annualized percentage change. Inflation rates are crucial economic indicators, reflecting the purchasing power and cost of living changes. For a more comprehensive understanding of overall inflation, analyzing a basket of food items rather than single commodities is recommended, as it offers a broader perspective of general price trends. This data is instrumental in economic planning, policy making, and understanding the macroeconomic environment.</notes>
+</var>
+<var ID="V094" name="trust_food_price_index" files="IDN_2021_RTFP_MKT">
+  <labl>Trust - Food price index</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>trust_food_price_index offers a trust score, ranging from 1-10, reflecting the reliability of the inflation calculation for food_price_index. These scores are specific to each market, time period, and commodity, considering the data availability and accuracy for the preceding 12 months. Higher scores indicate greater confidence and robustness in the inflation figures, based on the quality and quantity of data used and the cross-validated accuracy of imputed data. This score is key for users to assess the credibility and dependability of the inflation data, aiding in more informed economic and financial analysis. A score of 10 corresponds to an entry for which up to 12 months of preceding data has been fully observed. Values below 6 highlight observations generated with extremely low confidence.</notes>
+</var>
+<var ID="V095" name="DATES" files="IDN_2021_RTFP_MKT">
+  <labl>Date in yyyy-mm-dd format</labl>
+  <sumStat type="Number of valid values">44075</sumStat>
+  <notes>For comparing historical data, forecasting, or daily analysis, price_date provides a temporal reference. The field corresponds to the dates of each market price data point, formatted as yyyy-mm-dd. It denotes when prices were recorded or the time period for which price data are predicted, enabling chronological analysis and trend tracking of completed market and commodity price series.</notes>
+</var>
+</dataDscr></codeBook>
