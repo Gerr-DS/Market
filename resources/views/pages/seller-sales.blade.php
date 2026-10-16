@@ -85,6 +85,9 @@
                 const isDirect = order.fulfillment_type === 'direct_deal';
                 const p = order.product || {};
                 const img = p.images?.[0]?.image_path;
+                const paymentLabel = isDirect && order.payment_status === 'unpaid'
+                    ? '<span class="badge badge-muted">Diatur langsung dengan penjual</span>'
+                    : (paymentLabels[order.payment_status] || '');
 
                 let actionButtons = '';
                 const isClosed = ['completed', 'cancelled'].includes(order.order_status);
@@ -108,7 +111,7 @@
                 }
 
                 if (isDirect) {
-                    if (order.order_status === 'pending' && order.payment_status === 'paid_escrow') {
+                    if (order.order_status === 'pending' && ['unpaid', 'paid_escrow'].includes(order.payment_status)) {
                         actionButtons += `
                             <button type="button" class="btn btn-primary btn-sm" onclick="updateDirectHandoff(${order.id}, 'start')">
                                 <i data-lucide="handshake" style="width: 14px; height: 14px;"></i>
@@ -143,7 +146,7 @@
                                 <div class="flex items-center gap-2 mb-1">
                                     <span class="text-xs font-bold text-muted">${escapeHtml(order.order_number)}</span>
                                     ${statusLabels[order.order_status] || ''}
-                                    ${paymentLabels[order.payment_status] || ''}
+                                    ${paymentLabel}
                                     <span class="badge badge-muted">${isDirect ? 'Ambil Langsung' : 'Kurir Ekspedisi'}</span>
                                 </div>
                                 <h3 class="font-bold text-base mb-1">${escapeHtml(p.title || 'Produk')}</h3>

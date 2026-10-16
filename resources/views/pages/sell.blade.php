@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'Jual Barang dengan AI Studio — ReCircle')
+@section('title', 'Jual Produk — ReCircle')
 
 @section('content')
 <div class="page">
     <div class="container" style="max-width: 860px;">
         <!-- Header -->
         <div class="text-center mb-8">
-            <span class="badge badge-primary mb-2">Studio Verifikasi AI Gemini</span>
+            <span class="badge badge-primary mb-2">Pemeriksaan Produk</span>
             <h1 class="text-2xl font-bold">Jual Barang & Selamatkan Makanan</h1>
             <p class="text-sm text-muted mt-1 max-width: 500px; margin: auto;">
-                Tentukan harga jual sendiri. AI hanya membantu membaca tanggal kedaluwarsa makanan.
+                Tentukan sendiri harga jual barang dan makanan. Foto label makanan digunakan untuk membantu membaca tanggal kedaluwarsa.
             </p>
         </div>
 
@@ -112,7 +112,7 @@
                         </div>
                     </div>
                     <p class="text-xs text-muted mt-2">
-                        *AI Gemini akan memeriksa kejelasan tanggal untuk menjamin keamanan konsumsi pembeli.
+                        *Foto label digunakan untuk membantu membaca tanggal kedaluwarsa. Pastikan tanggalnya tetap diperiksa sebelum produk dijual.
                     </p>
                 </div>
 
@@ -173,11 +173,11 @@
                 <!-- Submit Button -->
                 <button type="submit" id="btnSubmitAnalysis" class="btn btn-primary btn-lg w-full">
                     <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i>
-                    <span>Analisis Produk dengan Gemini AI</span>
+                    <span>Periksa Produk</span>
                 </button>
             </form>
 
-            <!-- AI Analysis Results Panel -->
+            <!-- Product Review Results Panel -->
             <div id="aiResultPanel" class="flex flex-col gap-5 mt-6" style="display: none;">
                 <div class="ai-panel">
                 <div class="ai-status">
@@ -375,7 +375,7 @@
         const err = document.getElementById('sellFormError');
         err.style.display = 'none';
         btn.disabled = true;
-        btn.innerHTML = `<span class="spinner" style="width: 16px; height: 16px;"></span> <span>${document.querySelector('[name="type"]:checked').value === 'food' ? 'AI sedang membaca tanggal...' : 'Mengirim produk...'}</span>`;
+        btn.innerHTML = `<span class="spinner" style="width: 16px; height: 16px;"></span> <span>${document.querySelector('[name="type"]:checked').value === 'food' ? 'Sedang membaca tanggal...' : 'Mengirim produk...'}</span>`;
 
         const formData = new FormData(e.currentTarget);
 
@@ -411,7 +411,7 @@
 
             let detailsHtml = `
                 <div>Nama Produk Terbaca: <strong>${escapeHtml(analyzedProduct?.title || '')}</strong></div>
-                <div>Status AI: <strong class="${isRejected ? 'text-danger' : 'text-primary'}">${isRejected ? 'Perlu Tinjauan Ulang / Ditolak' : 'Layak Ditayangkan'}</strong></div>
+                <div>Status pemeriksaan: <strong class="${isRejected ? 'text-danger' : 'text-primary'}">${isRejected ? 'Perlu Tinjauan Ulang / Ditolak' : 'Layak Ditayangkan'}</strong></div>
             `;
 
             if (analysis.detected_date) {
@@ -421,7 +421,7 @@
                 detailsHtml += `<div class="text-base text-primary font-bold mt-2">Harga Jual yang Kamu Masukkan: ${rupiah(analyzedProduct.system_price)}</div>`;
             }
             if (data.rejection_reason) {
-                detailsHtml += `<div class="text-xs text-danger mt-2">Catatan AI: ${escapeHtml(data.rejection_reason)}</div>`;
+                detailsHtml += `<div class="text-xs text-danger mt-2">Catatan pemeriksaan: ${escapeHtml(data.rejection_reason)}</div>`;
             }
 
             document.getElementById('aiAnalysisDetails').innerHTML = detailsHtml;

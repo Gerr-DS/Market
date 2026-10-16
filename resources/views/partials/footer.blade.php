@@ -13,7 +13,7 @@
                     Platform sirkular cerdas untuk menyelamatkan makanan surplus dan memperpanjang usia pakai barang preloved pilihan.
                 </p>
                 <div class="flex items-center gap-3 mt-4 text-primary">
-                    <span class="badge badge-primary">AI Powered Verification</span>
+                    <span class="badge badge-primary">Pemeriksaan Tanggal Kedaluwarsa</span>
                     <span class="badge badge-success">Eco Impact</span>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                     <li><a href="/products" class="hover:text-primary transition">Semua Produk</a></li>
                     <li><a href="/products?type=food" class="hover:text-primary transition">Makanan Surplus Segar</a></li>
                     <li><a href="/products?type=goods" class="hover:text-primary transition">Barang Preloved Berkualitas</a></li>
-                    <li><a href="/sell" class="hover:text-primary transition">Jual Barang dengan AI</a></li>
+                    <li><a href="/sell" class="hover:text-primary transition">Jual Produk</a></li>
                 </ul>
             </div>
 
@@ -62,7 +62,7 @@
             <div class="flex gap-4">
                 <span>Inisiatif Berkelanjutan Mahasiswa</span>
                 <span>•</span>
-                <span>Didukung oleh Gemini AI</span>
+                <span>Pemeriksaan tanggal pada label makanan</span>
             </div>
         </div>
     </div>

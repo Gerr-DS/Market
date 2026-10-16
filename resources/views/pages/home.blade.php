@@ -10,7 +10,7 @@
             <div style="max-width: 680px;">
                 <div class="hero-tag">
                     <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i>
-                    <span>Pasar Sirkular Pertama dengan AI Verifikasi</span>
+                    <span>Pasar Sirkular Barang Preloved & Makanan Surplus</span>
                 </div>
                 
                 <h1>
@@ -35,7 +35,7 @@
                 <div class="flex items-center gap-6 flex-wrap text-sm text-muted">
                     <div class="flex items-center gap-2">
                         <i data-lucide="shield-check" style="width: 16px; height: 16px; color: var(--clr-primary);"></i>
-                        <span>Verifikasi Kualitas AI</span>
+                        <span>Pemeriksaan Tanggal Kedaluwarsa</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <i data-lucide="truck" style="width: 16px; height: 16px; color: var(--clr-primary);"></i>
@@ -146,12 +146,12 @@
                 <span class="badge badge-primary mb-3">Mulai Aksi Nyatamu</span>
                 <h3 class="text-2xl font-bold mb-3">Punya barang tak terpakai atau makanan sisa layak konsumsi?</h3>
                 <p class="text-muted text-sm mb-6" style="line-height: 1.7;">
-                    Jangan biarkan menumpuk atau berakhir di tempat sampah. Unggah fotonya, AI Gemini kami akan menganalisis kondisi, memverifikasi tanggal kedaluwarsa, dan merekomendasikan harga terbaik dalam hitungan detik.
+                    Jangan biarkan menumpuk atau berakhir di tempat sampah. Unggah foto label makanan untuk membantu membaca tanggal kedaluwarsa, lalu tentukan sendiri harga jual produkmu.
                 </p>
                 <div class="flex gap-3 flex-wrap">
                     <a href="/sell" class="btn btn-primary btn-lg">
                         <i data-lucide="camera" style="width: 18px; height: 18px;"></i>
-                        <span>Jual Sekarang dengan AI</span>
+                        <span>Jual Sekarang</span>
                     </a>
                     <a href="/products" class="btn btn-outline btn-lg">
                         <span>Mulai Belanja Cerdas</span>

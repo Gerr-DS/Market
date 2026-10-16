@@ -10,7 +10,7 @@
             <div>
                 <span class="badge badge-primary mb-2">Panel Moderasi & Pengawasan</span>
                 <h1 class="text-2xl font-bold">Pusat Resolusi Admin</h1>
-                <p class="text-sm text-muted">Tinjau sengketa pesanan pembeli dan setujui penarikan saldo escrow.</p>
+                <p class="text-sm text-muted">Tinjau dan selesaikan laporan sengketa pesanan.</p>
             </div>
             <button type="button" class="btn btn-outline btn-sm" onclick="loadAdminData()">
                 <i data-lucide="refresh-cw" style="width: 14px; height: 14px;"></i>
@@ -27,17 +27,6 @@
                 </h3>
                 <div id="adminReportsContainer" class="flex flex-col gap-3">
                     <div class="p-6 text-center text-xs text-muted">Memuat laporan...</div>
-                </div>
-            </div>
-
-            <!-- Withdrawals Section -->
-            <div class="card p-6">
-                <h3 class="text-base font-bold uppercase tracking-wider mb-4 flex items-center justify-between">
-                    <span>Permintaan Pencairan Saldo Bank</span>
-                    <span id="withdrawalsCountBadge" class="badge badge-info">0 Pengajuan</span>
-                </h3>
-                <div id="adminWithdrawalsContainer" class="flex flex-col gap-3">
-                    <div class="p-6 text-center text-xs text-muted">Memuat data penarikan...</div>
                 </div>
             </div>
         </div>
@@ -67,20 +56,13 @@
                 return;
             }
 
-            const [reportsRes, withdrawalsRes] = await Promise.all([
-                fetch(`${API}/admin/reports`, { headers }),
-                fetch(`${API}/admin/withdrawals`, { headers })
-            ]);
+            const reportsRes = await fetch(`${API}/admin/reports`, { headers });
 
             if (reportsRes.ok) {
                 const repData = await reportsRes.json();
                 renderReports(repData.data || repData);
             }
 
-            if (withdrawalsRes.ok) {
-                const withData = await withdrawalsRes.json();
-                renderWithdrawals(withData.data || withData);
-            }
         } catch (e) {
             console.error('Admin load error', e);
         }
@@ -123,49 +105,6 @@
         }).join('');
     }
 
-    function renderWithdrawals(withdrawals) {
-        const box = document.getElementById('adminWithdrawalsContainer');
-        document.getElementById('withdrawalsCountBadge').textContent = `${withdrawals.length} Pengajuan`;
-
-        if (withdrawals.length === 0) {
-            box.innerHTML = '<div class="empty-state py-6"><p class="text-xs text-muted">Belum ada pengajuan pencairan dana.</p></div>';
-            return;
-        }
-
-        box.innerHTML = withdrawals.map(w => {
-            const isPending = w.status === 'pending';
-            const statusBadges = {
-                pending: '<span class="badge badge-warning">Menunggu Keputusan</span>',
-                approved: '<span class="badge badge-success">Disetujui</span>',
-                rejected: '<span class="badge badge-danger">Ditolak</span>'
-            };
-
-            return `
-                <div class="card p-4 flex items-center justify-between flex-wrap gap-4" style="background: var(--clr-surface);">
-                    <div>
-                        <div class="flex items-center gap-2 mb-1">
-                            ${statusBadges[w.status] || ''}
-                            <span class="text-xs font-bold text-primary">${rupiah(w.amount)}</span>
-                        </div>
-                        <h4 class="font-bold text-sm">${escapeHtml(w.bank_name)} · ${escapeHtml(w.account_number)}</h4>
-                        <p class="text-xs text-muted mt-1">A/N: ${escapeHtml(w.account_holder_name)} (User: ${escapeHtml(w.user?.name || '')})</p>
-                    </div>
-
-                    ${isPending ? `
-                        <div class="flex gap-2">
-                            <button type="button" class="btn btn-primary btn-sm" onclick="decideWithdrawal(${w.id}, 'approve')">
-                                Setujui Pencairan
-                            </button>
-                            <button type="button" class="btn btn-danger btn-sm" onclick="decideWithdrawal(${w.id}, 'reject')">
-                                Tolak
-                            </button>
-                        </div>
-                    ` : ''}
-                </div>
-            `;
-        }).join('');
-    }
-
     async function decideReport(id, action) {
         try {
             const res = await fetch(`${API}/admin/reports/${id}/resolve`, {
@@ -180,26 +119,6 @@
 
             if (!res.ok) throw new Error('Gagal memproses keputusan laporan.');
             showToast('Keputusan berhasil disimpan.', 'success');
-            loadAdminData();
-        } catch (e) {
-            showToast(e.message, 'error');
-        }
-    }
-
-    async function decideWithdrawal(id, action) {
-        try {
-            const res = await fetch(`${API}/admin/withdrawals/${id}/decision`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': `Bearer ${token()}`
-                },
-                body: JSON.stringify({ action })
-            });
-
-            if (!res.ok) throw new Error('Gagal memproses penarikan.');
-            showToast(`Pengajuan berhasil di-${action === 'approve' ? 'setujui' : 'tolak'}.`, 'success');
             loadAdminData();
         } catch (e) {
             showToast(e.message, 'error');

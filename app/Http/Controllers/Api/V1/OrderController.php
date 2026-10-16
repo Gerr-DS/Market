@@ -24,7 +24,7 @@ class OrderController extends Controller
     public function incoming(Request $request)
     {
         return Order::with(['product.images', 'buyer:id,name'])
-            ->where('payment_status', '!=', 'unpaid')
+            ->where(fn ($query) => $query->where('payment_status', '!=', 'unpaid')->orWhere('fulfillment_type', 'direct_deal'))
             ->whereHas('product', fn ($query) => $query->where('user_id', $request->user()->id))
             ->latest()->paginate(20);
     }
@@ -70,6 +70,7 @@ class OrderController extends Controller
         $order = DB::transaction(function () use ($request, $order) {
             $locked = Order::whereKey($order->id)->lockForUpdate()->firstOrFail();
             abort_unless($locked->buyer_id === $request->user()->id, 403);
+            abort_if($locked->fulfillment_type === 'direct_deal', 409, 'Pembayaran ambil langsung diatur dengan penjual.');
             abort_unless($locked->order_status === 'pending' && $locked->payment_status === 'unpaid', 409, 'Pesanan ini tidak menunggu pembayaran.');
 
             $buyer = User::whereKey($locked->buyer_id)->lockForUpdate()->firstOrFail();
@@ -180,7 +181,7 @@ class OrderController extends Controller
         $data = $request->validate(['action' => 'required|in:start,complete']);
         if ($data['action'] === 'start') {
             abort_unless($order->order_status === 'pending', 409);
-            abort_unless($order->payment_status === 'paid_escrow', 409, 'Pembeli harus membayar pesanan sebelum serah terima dimulai.');
+            abort_unless(in_array($order->payment_status, ['unpaid', 'paid_escrow'], true), 409, 'Pesanan tidak dapat memulai serah terima.');
             $order->update(['order_status' => 'processing']);
         } else {
             abort_unless($order->order_status === 'processing', 409);
@@ -195,7 +196,13 @@ class OrderController extends Controller
             $locked = Order::whereKey($order->id)->lockForUpdate()->firstOrFail();
             abort_unless($locked->buyer_id === $request->user()->id, 403);
             abort_unless(in_array($locked->order_status, ['shipped', 'delivered'], true), 409, 'Pesanan belum dapat dikonfirmasi sebagai diterima.');
-            abort_unless($locked->payment_status === 'paid_escrow', 409, 'Pembayaran pesanan tidak ditemukan.');
+            $directUnpaid = $locked->fulfillment_type === 'direct_deal' && $locked->payment_status === 'unpaid';
+            abort_unless($locked->payment_status === 'paid_escrow' || $directUnpaid, 409, 'Pembayaran pesanan tidak ditemukan.');
+
+            if ($directUnpaid) {
+                $locked->update(['order_status' => 'completed', 'delivered_at' => $locked->delivered_at ?? now()]);
+                return $locked->fresh();
+            }
 
             if ($locked->order_status === 'shipped') {
                 $locked->update(['order_status' => 'delivered', 'delivered_at' => now()]);
@@ -204,7 +211,9 @@ class OrderController extends Controller
             return $locked->fresh();
         });
 
-        $wallet->release($order);
+        if ($order->payment_status === 'paid_escrow') {
+            $wallet->release($order);
+        }
         return $order->fresh();
     }
 

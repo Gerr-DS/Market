@@ -131,9 +131,10 @@
                 const img = p.images?.[0]?.image_path;
                 const isDirect = order.fulfillment_type === 'direct_deal';
                 const isClosed = ['completed', 'cancelled'].includes(order.order_status);
-                const orderStatusLabel = order.order_status === 'pending' && order.payment_status === 'unpaid'
-                    ? '<span class="badge badge-warning">Belum dibayar</span>'
-                    : (statusLabels[order.order_status] || '');
+                const orderStatusLabel = statusLabels[order.order_status] || '';
+                const paymentLabel = isDirect && order.payment_status === 'unpaid'
+                    ? 'Pembayaran diatur langsung dengan penjual'
+                    : (paymentLabels[order.payment_status] || order.payment_status || '');
 
                 let actions = '';
                 if (!isClosed) {
@@ -153,7 +154,7 @@
                     `;
                 }
 
-                if (order.order_status === 'pending' && order.payment_status === 'unpaid') {
+                if (!isDirect && order.order_status === 'pending' && order.payment_status === 'unpaid') {
                     actions += `
                         <button type="button" class="btn btn-primary btn-sm" onclick="payBuyerOrder(${order.id})">
                             <i data-lucide="wallet" style="width: 14px; height: 14px;"></i>
@@ -168,10 +169,10 @@
                             <i data-lucide="check" style="width: 14px; height: 14px;"></i>
                             <span>Konfirmasi Selesai / Diterima</span>
                         </button>
-                        <button type="button" class="btn btn-danger btn-sm" onclick="openReportModal(${order.id})">
-                            Laporkan Masalah
-                        </button>
                     `;
+                    if (!isDirect || order.payment_status === 'paid_escrow') {
+                        actions += `<button type="button" class="btn btn-danger btn-sm" onclick="openReportModal(${order.id})">Laporkan Masalah</button>`;
+                    }
                 }
 
                 return `
@@ -189,7 +190,7 @@
                                     Penjual: <strong>${escapeHtml(p.user?.name || 'Komunitas ReCircle')}</strong>
                                 </div>
                                 <div class="text-primary font-bold text-base">${rupiah(order.total_amount)}</div>
-                                <div class="text-xs text-muted">${escapeHtml(paymentLabels[order.payment_status] || order.payment_status || '')}</div>
+                                <div class="text-xs text-muted">${escapeHtml(paymentLabel)}</div>
                             </div>
                         </div>
 
@@ -218,6 +219,10 @@
         if (!order) return;
         const product = order.product || {};
         const shippingAddress = order.shipping_address;
+        const paymentStatusLabel = order.fulfillment_type === 'direct_deal' && order.payment_status === 'unpaid'
+            ? 'Diatur langsung dengan penjual'
+            : ({ unpaid: 'Belum dibayar', paid_escrow: 'Sudah dibayar · dana ditahan', released: 'Pembayaran selesai', refunded: 'Saldo dikembalikan' }[order.payment_status] || order.payment_status || '—');
+        const orderStatusLabel = ({ pending: 'Menunggu Konfirmasi Penjual', processing: 'Sedang Disiapkan Penjual', shipped: 'Dalam Pengiriman Kurir', delivered: 'Barang Sudah Tiba', completed: 'Pesanan Selesai', cancelled: 'Pesanan Dibatalkan', disputed: 'Dalam Tinjauan Sengketa' }[order.order_status] || order.order_status || '—');
         const addressText = shippingAddress
             ? (typeof shippingAddress === 'string' ? shippingAddress : [shippingAddress.recipient_name, shippingAddress.full_address, shippingAddress.area_label].filter(Boolean).join(', '))
             : 'Pengambilan / pengaturan langsung dengan penjual';
@@ -230,9 +235,9 @@
             </div>
             <div class="card p-4 text-sm flex flex-col gap-2">
                 <div>Penjual: <strong>${escapeHtml(product.user?.name || '—')}</strong></div>
-                <div>Status pesanan: <strong>${escapeHtml(order.order_status === 'pending' && order.payment_status === 'unpaid' ? 'Belum dibayar' : (order.order_status || '—'))}</strong></div>
-                <div>Status pembayaran: <strong>${escapeHtml(order.payment_status || '—')}</strong></div>
-                <div>Metode: <strong>${order.fulfillment_type === 'expedition' ? 'Kurir ekspedisi' : 'Pengambilan langsung'}</strong></div>
+                <div>Status pesanan: <strong>${escapeHtml(orderStatusLabel)}</strong></div>
+                <div>Status pembayaran: <strong>${escapeHtml(paymentStatusLabel)}</strong></div>
+                <div>Metode: <strong>${order.fulfillment_type === 'expedition' ? 'Kurir ekspedisi' : 'Ambil langsung / atur dengan penjual'}</strong></div>
                 <div>Alamat: <strong>${escapeHtml(addressText)}</strong></div>
                 ${order.shipping_courier ? `<div>Kurir: <strong>${escapeHtml(order.shipping_courier)}</strong></div>` : ''}
                 ${order.tracking_number ? `<div>Nomor resi: <strong>${escapeHtml(order.tracking_number)}</strong></div>` : ''}
@@ -244,7 +249,7 @@
         `;
 
         document.getElementById('orderDetailActions').innerHTML = `
-            ${order.order_status === 'pending' && order.payment_status === 'unpaid' ? `<button class="btn btn-primary flex-1" onclick="payBuyerOrder(${order.id})">Bayar dari Saldo</button>` : ''}
+            ${order.fulfillment_type !== 'direct_deal' && order.order_status === 'pending' && order.payment_status === 'unpaid' ? `<button class="btn btn-primary flex-1" onclick="payBuyerOrder(${order.id})">Bayar dari Saldo</button>` : ''}
             ${!['completed', 'cancelled'].includes(order.order_status) ? `<button class="btn btn-outline flex-1" onclick="chatWithSeller(${order.id})">Chat Penjual</button>` : ''}
         `;
         document.getElementById('orderDetailModal').style.display = 'flex';

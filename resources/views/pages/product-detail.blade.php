@@ -247,7 +247,7 @@
                                 <span class="badge ${isFood ? 'badge-warning' : 'badge-primary'}">${typeLabel}</span>
                                 <span class="badge badge-success flex items-center gap-1">
                                     <i data-lucide="sparkles" style="width: 12px; height: 12px;"></i>
-                                    <span>AI Verified ${currentProduct.ai_confidence ? currentProduct.ai_confidence + '%' : ''}</span>
+                                    <span>Produk Terverifikasi</span>
                                 </span>
                             </div>
                             <h1 class="text-2xl font-bold mb-2">${escapeHtml(currentProduct.title)}</h1>
@@ -259,7 +259,7 @@
                             </div>
                         </div>
 
-                        <!-- AI & Condition Assessment Card -->
+                        <!-- Product Condition Assessment Card -->
                         <div class="card p-4" style="background: rgba(0,200,150,0.05); border-color: rgba(0,200,150,0.2);">
                             <div class="text-xs font-bold uppercase tracking-wider text-primary mb-2 flex items-center gap-2">
                                 <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i>
