@@ -18,11 +18,6 @@ return [
         'token' => env('POSTMARK_TOKEN'),
     ],
 
-    'gemini' => [
-        'key' => env('GEMINI_API_KEY'),
-        'model' => env('GEMINI_MODEL', 'gemini-3.8-flash'),
-        'url' => env('GEMINI_API_URL', 'https://generativelanguage.googleapis.com/v1beta'),
-    ],
     'dprice' => [
         'url' => env('DPRICE_API_URL', 'https://dprice.id/api/v1'),
         'key' => env('DPRICE_API_KEY'),

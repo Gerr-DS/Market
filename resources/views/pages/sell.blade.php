@@ -7,10 +7,10 @@
     <div class="container" style="max-width: 860px;">
         <!-- Header -->
         <div class="text-center mb-8">
-            <span class="badge badge-primary mb-2">Pemeriksaan Produk</span>
+            <span class="badge badge-primary mb-2">Listing Produk</span>
             <h1 class="text-2xl font-bold">Jual Barang & Selamatkan Makanan</h1>
             <p class="text-sm text-muted mt-1 max-width: 500px; margin: auto;">
-                Tentukan sendiri harga jual barang dan makanan. Foto label makanan digunakan untuk membantu membaca tanggal kedaluwarsa.
+                Tentukan sendiri harga jual barang dan makanan. Untuk makanan, masukkan tanggal kedaluwarsa sesuai label produk.
             </p>
         </div>
 
@@ -104,15 +104,11 @@
                     <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 16px;">
                         <div class="form-group">
                             <label class="form-label">Tanggal Kedaluwarsa</label>
-                            <input type="date" name="expired_at" class="form-input">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Foto Label / Expired Date</label>
-                            <input type="file" name="expiry_label" accept="image/*" class="form-input">
+                            <input type="date" id="expiryDateInput" name="expired_at" class="form-input">
                         </div>
                     </div>
                     <p class="text-xs text-muted mt-2">
-                        *Foto label digunakan untuk membantu membaca tanggal kedaluwarsa. Pastikan tanggalnya tetap diperiksa sebelum produk dijual.
+                        Masukkan tanggal yang tercetak pada label. Produk dengan masa kedaluwarsa 30 hari atau kurang tidak dapat dijual.
                     </p>
                 </div>
 
@@ -172,27 +168,17 @@
 
                 <!-- Submit Button -->
                 <button type="submit" id="btnSubmitAnalysis" class="btn btn-primary btn-lg w-full">
-                    <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i>
+                    <i data-lucide="send" style="width: 18px; height: 18px;"></i>
                     <span>Periksa Produk</span>
                 </button>
             </form>
 
             <!-- Product Review Results Panel -->
             <div id="aiResultPanel" class="flex flex-col gap-5 mt-6" style="display: none;">
-                <div class="ai-panel">
+                <div class="card p-5">
                 <div class="ai-status">
                         <div class="ai-pulse"></div>
                         <strong class="text-base text-primary">Hasil Pemeriksaan Produk</strong>
-                    </div>
-
-                    <div id="aiConfidenceRow" class="mb-4">
-                        <div class="flex justify-between text-xs font-semibold">
-                            <span class="text-muted">Keyakinan Pembacaan Tanggal</span>
-                            <span id="aiConfidenceValue" class="text-primary">95%</span>
-                        </div>
-                        <div class="ai-confidence">
-                            <div id="aiConfidenceBar" class="ai-confidence-bar" style="width: 95%;"></div>
-                        </div>
                     </div>
 
                     <div id="aiAnalysisDetails" class="text-sm flex flex-col gap-2" style="line-height: 1.7;"></div>
@@ -242,13 +228,14 @@
         const optGoods = document.getElementById('optTypeGoods');
         const optFood = document.getElementById('optTypeFood');
         const submitLabel = document.querySelector('#btnSubmitAnalysis span');
+        document.getElementById('expiryDateInput').required = type === 'food';
 
         if (type === 'food') {
             goodsBox.style.display = 'none';
             foodBox.style.display = 'block';
             optFood.style.borderColor = 'var(--clr-primary)';
             optGoods.style.borderColor = 'var(--clr-border)';
-            submitLabel.textContent = 'Periksa Tanggal Kedaluwarsa';
+            submitLabel.textContent = 'Kirim Produk untuk Ditinjau';
         } else {
             goodsBox.style.display = 'grid';
             foodBox.style.display = 'none';
@@ -375,7 +362,7 @@
         const err = document.getElementById('sellFormError');
         err.style.display = 'none';
         btn.disabled = true;
-        btn.innerHTML = `<span class="spinner" style="width: 16px; height: 16px;"></span> <span>${document.querySelector('[name="type"]:checked').value === 'food' ? 'Sedang membaca tanggal...' : 'Mengirim produk...'}</span>`;
+        btn.innerHTML = `<span class="spinner" style="width: 16px; height: 16px;"></span> <span>Mengirim produk...</span>`;
 
         const formData = new FormData(e.currentTarget);
 
@@ -403,19 +390,13 @@
 
             const isRejected = analyzedProduct?.status === 'rejected';
             const analysis = data.analysis || {};
-            const conf = analysis.confidence_score ?? analyzedProduct?.ai_confidence ?? 85;
-
-            document.getElementById('aiConfidenceRow').style.display = analyzedProduct?.type === 'food' ? 'block' : 'none';
-            document.getElementById('aiConfidenceValue').textContent = `${conf}%`;
-            document.getElementById('aiConfidenceBar').style.width = `${conf}%`;
-
             let detailsHtml = `
-                <div>Nama Produk Terbaca: <strong>${escapeHtml(analyzedProduct?.title || '')}</strong></div>
-                <div>Status pemeriksaan: <strong class="${isRejected ? 'text-danger' : 'text-primary'}">${isRejected ? 'Perlu Tinjauan Ulang / Ditolak' : 'Layak Ditayangkan'}</strong></div>
+                <div>Produk: <strong>${escapeHtml(analyzedProduct?.title || '')}</strong></div>
+                <div>Status: <strong class="${isRejected ? 'text-danger' : 'text-primary'}">${isRejected ? 'Tidak memenuhi syarat' : 'Menunggu persetujuan'}</strong></div>
             `;
 
             if (analysis.detected_date) {
-                detailsHtml += `<div>Tanggal Kedaluwarsa Terbaca: <strong class="text-warning">${escapeHtml(analysis.detected_date)}</strong></div>`;
+                detailsHtml += `<div>Tanggal Kedaluwarsa: <strong class="text-warning">${escapeHtml(analysis.detected_date)}</strong></div>`;
             }
             if (analyzedProduct?.system_price) {
                 detailsHtml += `<div class="text-base text-primary font-bold mt-2">Harga Jual yang Kamu Masukkan: ${rupiah(analyzedProduct.system_price)}</div>`;
@@ -436,7 +417,7 @@
                 btnReject.style.display = 'none';
             }
 
-            showToast(analyzedProduct?.type === 'food' ? 'Tanggal kedaluwarsa selesai diperiksa.' : 'Produk siap ditinjau.', 'success');
+            showToast(isRejected ? 'Produk tidak memenuhi syarat.' : 'Produk siap ditinjau.', 'success');
             lucide.createIcons();
         } catch (error) {
             err.textContent = error.message;
@@ -444,7 +425,7 @@
             showToast(error.message, 'error');
         } finally {
             btn.disabled = false;
-            btn.innerHTML = `<i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> <span>${document.querySelector('[name="type"]:checked').value === 'food' ? 'Periksa Tanggal Kedaluwarsa' : 'Kirim Produk untuk Ditinjau'}</span>`;
+            btn.innerHTML = `<i data-lucide="send" style="width: 18px; height: 18px;"></i> <span>Kirim Produk untuk Ditinjau</span>`;
             lucide.createIcons();
         }
     });
