@@ -33,7 +33,7 @@ return [
         'webhook_secret' => env('LOGISTICS_WEBHOOK_SECRET'),
         'api_key' => env('RAJAONGKIR_API_KEY'),
         'api_url' => env('RAJAONGKIR_API_URL', 'https://rajaongkir.komerce.id/api/v1'),
-        'couriers' => env('RAJAONGKIR_COURIERS', 'jne:sicepat:ide:sap:jnt:ninja:tiki:lion:anteraja:pos:ncs:rex:rpx:sentral:star:wahana:dse'),
+        'couriers' => env('RAJAONGKIR_COURIERS', 'jne:sicepat:ide:sap:jnt:ninja:tiki:lion:anteraja:pos:ncs:rex:rpx:sentral:star:wahana'),
     ],
 
     'ses' => [

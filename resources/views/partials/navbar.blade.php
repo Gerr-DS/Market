@@ -90,7 +90,7 @@
                             <i data-lucide="credit-card" style="width: 16px; height: 16px;"></i>
                             <span>Dompet & Saldo</span>
                         </a>
-                        <a href="/admin" class="dropdown-item">
+                        <a href="/admin" id="navAdminLink" class="dropdown-item" style="display: none;">
                             <i data-lucide="shield-check" style="width: 16px; height: 16px;"></i>
                             <span>Panel Admin</span>
                         </a>

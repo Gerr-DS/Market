@@ -10,7 +10,7 @@
             <span class="badge badge-primary mb-2">Studio Verifikasi AI Gemini</span>
             <h1 class="text-2xl font-bold">Jual Barang & Selamatkan Makanan</h1>
             <p class="text-sm text-muted mt-1 max-width: 500px; margin: auto;">
-                Sistem AI kami akan memverifikasi keaslian foto, membaca label kedaluwarsa, dan merekomendasikan harga pasar otomatis.
+                Tentukan harga jual sendiri. AI hanya membantu membaca tanggal kedaluwarsa makanan.
             </p>
         </div>
 
@@ -81,10 +81,18 @@
                             <option value="heavily_used">Sudah Banyak Dipakai</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Harga Asli / Baru (Rp Acuan)</label>
-                        <input type="number" name="seller_price" class="form-input" placeholder="Contoh: 450000" min="1000">
-                    </div>
+                </div>
+
+                <div id="sellerPriceField" class="form-group">
+                    <label class="form-label">Harga Jual (Rp)</label>
+                    <input type="number" name="seller_price" class="form-input" placeholder="Masukkan harga jual" min="1" step="1" required>
+                    <small class="text-xs text-muted">Harga ini akan digunakan langsung sebagai harga produk.</small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Jumlah stok yang dijual</label>
+                    <input type="number" name="stock" class="form-input" placeholder="Contoh: 5" min="1" max="1000000" step="1" required>
+                    <small class="text-xs text-muted">Stok berkurang satu setiap ada pesanan baru.</small>
                 </div>
 
                 <!-- Food-only Fields -->
@@ -172,14 +180,14 @@
             <!-- AI Analysis Results Panel -->
             <div id="aiResultPanel" class="flex flex-col gap-5 mt-6" style="display: none;">
                 <div class="ai-panel">
-                    <div class="ai-status">
+                <div class="ai-status">
                         <div class="ai-pulse"></div>
-                        <strong class="text-base text-primary">Hasil Analisis & Rekomendasi Gemini AI</strong>
+                        <strong class="text-base text-primary">Hasil Pemeriksaan Produk</strong>
                     </div>
 
                     <div id="aiConfidenceRow" class="mb-4">
                         <div class="flex justify-between text-xs font-semibold">
-                            <span class="text-muted">Tingkat Keyakinan AI</span>
+                            <span class="text-muted">Keyakinan Pembacaan Tanggal</span>
                             <span id="aiConfidenceValue" class="text-primary">95%</span>
                         </div>
                         <div class="ai-confidence">
@@ -194,6 +202,10 @@
                     <button type="button" id="btnApproveProduct" class="btn btn-primary btn-lg flex-1" style="display: none;" onclick="approveAndPublishProduct()">
                         <i data-lucide="check" style="width: 18px; height: 18px;"></i>
                         <span>Setujui & Terbitkan ke Etalase</span>
+                    </button>
+                    <button type="button" id="btnRejectProduct" class="btn btn-danger btn-lg flex-1" style="display: none;" onclick="rejectAndDeleteProduct()">
+                        <i data-lucide="trash-2" style="width: 18px; height: 18px;"></i>
+                        <span>Tidak Disetujui & Hapus</span>
                     </button>
                     <button type="button" class="btn btn-outline btn-lg" onclick="resetSellStudio()">
                         <span>Mulai Lagi</span>
@@ -229,17 +241,20 @@
         const foodBox = document.getElementById('foodFields');
         const optGoods = document.getElementById('optTypeGoods');
         const optFood = document.getElementById('optTypeFood');
+        const submitLabel = document.querySelector('#btnSubmitAnalysis span');
 
         if (type === 'food') {
             goodsBox.style.display = 'none';
             foodBox.style.display = 'block';
             optFood.style.borderColor = 'var(--clr-primary)';
             optGoods.style.borderColor = 'var(--clr-border)';
+            submitLabel.textContent = 'Periksa Tanggal Kedaluwarsa';
         } else {
             goodsBox.style.display = 'grid';
             foodBox.style.display = 'none';
             optGoods.style.borderColor = 'var(--clr-primary)';
             optFood.style.borderColor = 'var(--clr-border)';
+            submitLabel.textContent = 'Kirim Produk untuk Ditinjau';
         }
     }
 
@@ -360,7 +375,7 @@
         const err = document.getElementById('sellFormError');
         err.style.display = 'none';
         btn.disabled = true;
-        btn.innerHTML = `<span class="spinner" style="width: 16px; height: 16px;"></span> <span>AI Sedang Menganalisis Foto & Label...</span>`;
+        btn.innerHTML = `<span class="spinner" style="width: 16px; height: 16px;"></span> <span>${document.querySelector('[name="type"]:checked').value === 'food' ? 'AI sedang membaca tanggal...' : 'Mengirim produk...'}</span>`;
 
         const formData = new FormData(e.currentTarget);
 
@@ -390,6 +405,7 @@
             const analysis = data.analysis || {};
             const conf = analysis.confidence_score ?? analyzedProduct?.ai_confidence ?? 85;
 
+            document.getElementById('aiConfidenceRow').style.display = analyzedProduct?.type === 'food' ? 'block' : 'none';
             document.getElementById('aiConfidenceValue').textContent = `${conf}%`;
             document.getElementById('aiConfidenceBar').style.width = `${conf}%`;
 
@@ -401,11 +417,8 @@
             if (analysis.detected_date) {
                 detailsHtml += `<div>Tanggal Kedaluwarsa Terbaca: <strong class="text-warning">${escapeHtml(analysis.detected_date)}</strong></div>`;
             }
-            if (analysis.condition_assessment) {
-                detailsHtml += `<div>Kondisi Fisik: <strong>${escapeHtml(analysis.condition_assessment)}</strong></div>`;
-            }
             if (analyzedProduct?.system_price) {
-                detailsHtml += `<div class="text-base text-primary font-bold mt-2">Harga Jual Disarankan: ${rupiah(analyzedProduct.system_price)}</div>`;
+                detailsHtml += `<div class="text-base text-primary font-bold mt-2">Harga Jual yang Kamu Masukkan: ${rupiah(analyzedProduct.system_price)}</div>`;
             }
             if (data.rejection_reason) {
                 detailsHtml += `<div class="text-xs text-danger mt-2">Catatan AI: ${escapeHtml(data.rejection_reason)}</div>`;
@@ -414,13 +427,16 @@
             document.getElementById('aiAnalysisDetails').innerHTML = detailsHtml;
 
             const btnApprove = document.getElementById('btnApproveProduct');
+            const btnReject = document.getElementById('btnRejectProduct');
             if (!isRejected && analyzedProduct?.status === 'pending_approval') {
                 btnApprove.style.display = 'inline-flex';
+                btnReject.style.display = 'inline-flex';
             } else {
                 btnApprove.style.display = 'none';
+                btnReject.style.display = 'none';
             }
 
-            showToast('Analisis AI selesai!', 'success');
+            showToast(analyzedProduct?.type === 'food' ? 'Tanggal kedaluwarsa selesai diperiksa.' : 'Produk siap ditinjau.', 'success');
             lucide.createIcons();
         } catch (error) {
             err.textContent = error.message;
@@ -428,7 +444,7 @@
             showToast(error.message, 'error');
         } finally {
             btn.disabled = false;
-            btn.innerHTML = `<i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> <span>Analisis Produk dengan Gemini AI</span>`;
+            btn.innerHTML = `<i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> <span>${document.querySelector('[name="type"]:checked').value === 'food' ? 'Periksa Tanggal Kedaluwarsa' : 'Kirim Produk untuk Ditinjau'}</span>`;
             lucide.createIcons();
         }
     });
@@ -460,6 +476,34 @@
             showToast(err.message, 'error');
             btn.disabled = false;
             btn.textContent = 'Setujui & Terbitkan ke Etalase';
+        }
+    }
+
+    async function rejectAndDeleteProduct() {
+        if (!analyzedProduct || !confirm('Produk ini dan seluruh foto serta data terkait akan dihapus. Lanjutkan?')) return;
+
+        const btn = document.getElementById('btnRejectProduct');
+        btn.disabled = true;
+        try {
+            const res = await fetch(`${API}/products/${analyzedProduct.id}/approval`, {
+                method: 'PATCH',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token()}`
+                },
+                body: JSON.stringify({ approved: false })
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.message || 'Produk belum dapat dihapus.');
+
+            analyzedProduct = null;
+            document.getElementById('aiAnalysisDetails').innerHTML = '<div class="text-danger font-bold">Produk tidak disetujui dan seluruh data terkait telah dihapus.</div>';
+            document.getElementById('btnApproveProduct').style.display = 'none';
+            btn.style.display = 'none';
+        } catch (error) {
+            btn.disabled = false;
+            showToast(error.message, 'error');
         }
     }
 

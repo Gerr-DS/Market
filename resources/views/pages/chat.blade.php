@@ -87,6 +87,81 @@
 
             if (!res.ok) throw new Error('Gagal memuat daftar obrolan.');
             const list = await res.json();
+            window._conversations = list;
+            let requestedIndex = -1;
+
+            if (initialProductId) {
+                const headers = { 'Accept': 'application/json', 'Authorization': `Bearer ${token()}` };
+                const [productResponse, profileResponse] = await Promise.all([
+                    fetch(`${API}/products/${encodeURIComponent(initialProductId)}`, { headers }),
+                    fetch(`${API}/user/profile`, { headers })
+                ]);
+                const product = await productResponse.json();
+                const profile = await profileResponse.json();
+                if (!productResponse.ok || !profileResponse.ok) {
+                    throw new Error(product.message || 'Produk atau akun tidak dapat dimuat untuk memulai chat.');
+                }
+                if (Number(product.user_id) === Number(profile.id)) {
+                    throw new Error('Anda tidak dapat memulai chat dengan akun sendiri.');
+                }
+
+                let index = list.findIndex(c => String(c.product_id) === String(product.id)
+                    && String(c.other_user_id) === String(product.user_id));
+                if (index < 0) {
+                    list.unshift({
+                        order_id: null,
+                        buyer_id: profile.id,
+                        product_id: product.id,
+                        product_title: product.title,
+                        other_user_id: product.user_id,
+                        other_user_name: product.user?.name || 'Penjual',
+                        side: 'buyer',
+                        order_status: 'Chat produk',
+                        last_message: null
+                    });
+                    index = 0;
+                }
+                requestedIndex = index;
+            }
+
+            if (initialOrderId) {
+                let index = list.findIndex(c => String(c.order_id) === String(initialOrderId));
+                if (index < 0) {
+                    const headers = { 'Accept': 'application/json', 'Authorization': `Bearer ${token()}` };
+                    const [ordersResponse, profileResponse] = await Promise.all([
+                        fetch(`${API}/user/orders`, { headers }),
+                        fetch(`${API}/user/profile`, { headers })
+                    ]);
+                    const ordersPayload = await ordersResponse.json();
+                    const profile = await profileResponse.json();
+                    if (!ordersResponse.ok || !profileResponse.ok) {
+                        throw new Error('Pesanan atau akun tidak dapat dimuat untuk memulai chat.');
+                    }
+                    const order = (ordersPayload.data || []).find(item => String(item.id) === String(initialOrderId));
+                    if (!order || !order.product) throw new Error('Pesanan tidak ditemukan untuk memulai chat.');
+                    const product = order.product;
+                    const sellerId = product.user_id || product.user?.id;
+                    const existingIndex = list.findIndex(c => String(c.product_id) === String(product.id)
+                        && String(c.other_user_id) === String(sellerId));
+                    if (existingIndex >= 0) {
+                        index = existingIndex;
+                    } else {
+                        list.unshift({
+                            order_id: order.id,
+                            buyer_id: profile.id,
+                            product_id: product.id,
+                            product_title: product.title,
+                            other_user_id: sellerId,
+                            other_user_name: product.user?.name || 'Penjual',
+                            side: 'buyer',
+                            order_status: order.order_status,
+                            last_message: null
+                        });
+                        index = 0;
+                    }
+                }
+                requestedIndex = index;
+            }
 
             if (list.length === 0) {
                 box.innerHTML = `
@@ -117,6 +192,10 @@
             window._conversations = list;
 
             // Auto-select if requested
+            if (requestedIndex >= 0) {
+                selectConversation(requestedIndex, box.querySelector(`[data-index="${requestedIndex}"]`));
+                return;
+            }
             if (initialOrderId) {
                 const target = list.find(c => String(c.order_id) === String(initialOrderId));
                 if (target) {

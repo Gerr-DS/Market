@@ -59,6 +59,14 @@
         };
 
         try {
+            const profileRes = await fetch(`${API}/user/profile`, { headers });
+            if (!profileRes.ok) throw new Error('Sesi tidak valid. Silakan masuk kembali.');
+            const profile = await profileRes.json();
+            if (profile.role !== 'admin') {
+                window.location.replace('/dashboard');
+                return;
+            }
+
             const [reportsRes, withdrawalsRes] = await Promise.all([
                 fetch(`${API}/admin/reports`, { headers }),
                 fetch(`${API}/admin/withdrawals`, { headers })

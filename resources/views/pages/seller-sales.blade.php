@@ -71,8 +71,14 @@
                 shipped: '<span class="badge badge-info">Dalam Perjalanan Kurir</span>',
                 delivered: '<span class="badge badge-primary">Terkirim / Sampai</span>',
                 completed: '<span class="badge badge-success">Selesai</span>',
-                cancelled: '<span class="badge badge-danger">Dibatalkan</span>',
+                cancelled: '<span class="badge badge-danger">Dibatalkan / Ditolak</span>',
                 disputed: '<span class="badge badge-danger">Dalam Tinjauan Masalah</span>'
+            };
+            const paymentLabels = {
+                unpaid: '<span class="badge badge-warning">Belum dibayar</span>',
+                paid_escrow: '<span class="badge badge-success">Sudah dibayar</span>',
+                released: '<span class="badge badge-success">Pembayaran selesai</span>',
+                refunded: '<span class="badge badge-muted">Saldo dikembalikan</span>'
             };
 
             container.innerHTML = orders.map(order => {
@@ -92,8 +98,17 @@
                     `;
                 }
 
+                if (order.order_status === 'pending' && ['unpaid', 'paid_escrow'].includes(order.payment_status)) {
+                    actionButtons += `
+                        <button type="button" class="btn btn-danger btn-sm" onclick="rejectSellerOrder(${order.id})">
+                            <i data-lucide="x-circle" style="width: 14px; height: 14px;"></i>
+                            <span>Tolak Pesanan</span>
+                        </button>
+                    `;
+                }
+
                 if (isDirect) {
-                    if (order.order_status === 'pending') {
+                    if (order.order_status === 'pending' && order.payment_status === 'paid_escrow') {
                         actionButtons += `
                             <button type="button" class="btn btn-primary btn-sm" onclick="updateDirectHandoff(${order.id}, 'start')">
                                 <i data-lucide="handshake" style="width: 14px; height: 14px;"></i>
@@ -110,7 +125,7 @@
                     }
                 } else {
                     // Expedition
-                    if (['pending', 'processing'].includes(order.order_status)) {
+                    if (['pending', 'processing'].includes(order.order_status) && order.payment_status === 'paid_escrow') {
                         actionButtons += `
                             <button type="button" class="btn btn-primary btn-sm" onclick="shipExpeditionOrder(${order.id})">
                                 <i data-lucide="truck" style="width: 14px; height: 14px;"></i>
@@ -128,6 +143,7 @@
                                 <div class="flex items-center gap-2 mb-1">
                                     <span class="text-xs font-bold text-muted">${escapeHtml(order.order_number)}</span>
                                     ${statusLabels[order.order_status] || ''}
+                                    ${paymentLabels[order.payment_status] || ''}
                                     <span class="badge badge-muted">${isDirect ? 'Ambil Langsung' : 'Kurir Ekspedisi'}</span>
                                 </div>
                                 <h3 class="font-bold text-base mb-1">${escapeHtml(p.title || 'Produk')}</h3>
@@ -196,6 +212,27 @@
             loadSellerSales();
         } catch (err) {
             showToast(err.message, 'error');
+        }
+    }
+
+    async function rejectSellerOrder(id) {
+        if (!confirm('Tolak pesanan ini? Stok produk akan dikembalikan dan pembeli tidak dapat melanjutkan pesanan.')) return;
+
+        try {
+            const res = await fetch(`${API}/orders/${id}/reject`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token()}`
+                }
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.message || 'Pesanan tidak dapat ditolak.');
+
+            showToast(data.message || 'Pesanan berhasil ditolak.', 'success');
+            loadSellerSales();
+        } catch (error) {
+            showToast(error.message, 'error');
         }
     }
 

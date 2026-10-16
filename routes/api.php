@@ -20,6 +20,7 @@ Route::prefix('v1')->group(function () {
         return Category::query()->orderBy('name')->get(['id','name','slug']);
     });
     Route::get('/products',[ProductController::class,'index']);
+    Route::get('/products/{product}',[ProductController::class,'show']);
     Route::post('/payment/webhook',PaymentWebhookController::class);
     Route::post('/logistics/webhook',LogisticsWebhookController::class);
     Route::get('/wallet/demo-topups/scan/{token}',[WalletController::class,'scanDemoTopup'])
@@ -28,6 +29,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/user/profile',[AuthController::class,'profile']);
         Route::get('/user/products',[ProductController::class,'mine']);
         Route::delete('/products/{product}',[ProductController::class,'destroy']);
+        Route::put('/products/{product}',[ProductController::class,'update']);
         Route::get('/user/wallet/transactions',[WalletController::class,'transactions']);
         Route::post('/user/wallet/demo-topups',[WalletController::class,'createDemoTopup'])->middleware('throttle:10,1');
         Route::get('/user/wallet/demo-topups/{topup}',[WalletController::class,'demoTopupStatus']);
@@ -38,6 +40,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/products/analyze',[ProductController::class,'analyze'])->middleware('throttle:10,1');
         Route::patch('/products/{product}/approval',[ProductController::class,'approve']);
         Route::post('/orders/checkout',[OrderController::class,'checkout']);
+        Route::post('/orders/{order}/pay',[OrderController::class,'pay']);
         Route::post('/shipping/quotes',[ShippingQuoteController::class,'__invoke'])->middleware('throttle:20,1');
         Route::get('/shipping/locations',[ShippingQuoteController::class,'locations'])->middleware('throttle:30,1');
         Route::get('/user/orders',[OrderController::class,'mine']);
@@ -47,6 +50,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/orders/{order}/chats',[ChatController::class,'sendForOrder']);
         Route::post('/orders/{order}/confirm',[OrderController::class,'confirm']);
         Route::post('/orders/{order}/cancel',[OrderController::class,'cancel']);
+        Route::post('/orders/{order}/reject',[OrderController::class,'rejectBySeller']);
         Route::post('/orders/{order}/reports',[OrderController::class,'report']);
         Route::prefix('admin')->group(function(){
             Route::get('/reports',[AdminController::class,'reports']);

@@ -254,6 +254,7 @@
             const userName = document.getElementById('navUserName');
             const userAvatar = document.getElementById('navUserAvatar');
             const userBalance = document.getElementById('navUserBalance');
+            const adminLink = document.getElementById('navAdminLink');
 
             if (!guestNav || !userNav) return;
 
@@ -261,6 +262,7 @@
             if (!t) {
                 guestNav.style.display = 'flex';
                 userNav.style.display = 'none';
+                if (adminLink) adminLink.style.display = 'none';
                 return;
             }
 
@@ -279,6 +281,7 @@
                 const user = await res.json();
                 guestNav.style.display = 'none';
                 userNav.style.display = 'flex';
+                if (adminLink) adminLink.style.display = user.role === 'admin' ? 'flex' : 'none';
 
                 if (userName) userName.textContent = user.name || 'Pengguna';
                 if (userAvatar) userAvatar.textContent = (user.name || 'U').charAt(0).toUpperCase();

@@ -24,6 +24,56 @@
     </div>
 </div>
 
+<!-- Edit Product Modal -->
+<div id="editProductModal" class="modal-overlay" style="display: none;">
+    <div class="modal" style="max-width: 620px;">
+        <div class="modal-header">
+            <div>
+                <h3 class="modal-title">Edit Postingan</h3>
+                <p class="text-xs text-muted mt-1">Perbarui informasi dan harga postingan Anda.</p>
+            </div>
+            <button type="button" class="btn btn-ghost btn-sm" onclick="closeEditProductModal()">✕</button>
+        </div>
+        <form id="editProductForm" class="flex flex-col gap-4">
+            <div class="form-group">
+                <label class="form-label">Nama produk</label>
+                <input type="text" name="title" id="editProductTitle" class="form-input" maxlength="255" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Deskripsi</label>
+                <textarea name="description" id="editProductDescription" class="form-input" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Harga jual (Rp)</label>
+                <input type="number" name="seller_price" id="editProductPrice" class="form-input" min="1" step="1" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Jumlah stok</label>
+                <input type="number" name="stock" id="editProductStock" class="form-input" min="0" max="1000000" step="1" required>
+                <small class="text-xs text-muted">Isi 0 untuk menyembunyikan produk dari katalog. Tambahkan stok untuk menayangkannya kembali.</small>
+            </div>
+            <div id="editConditionGroup" class="form-group">
+                <label class="form-label">Kondisi barang</label>
+                <select name="item_condition" id="editProductCondition" class="form-input">
+                    <option value="like_new">Seperti baru</option>
+                    <option value="minor_defect">Ada cacat ringan</option>
+                    <option value="heavily_used">Sudah banyak dipakai</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Alamat pengambilan</label>
+                <textarea name="pickup_address" id="editProductPickupAddress" class="form-input" rows="2" maxlength="1000" required></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Berat paket (gram)</label>
+                <input type="number" name="weight_gram" id="editProductWeight" class="form-input" min="1" max="50000" required>
+            </div>
+            <div id="editProductError" class="text-xs text-danger" style="display: none;"></div>
+            <button type="submit" id="saveProductEdit" class="btn btn-primary btn-lg w-full">Simpan Perubahan</button>
+        </form>
+    </div>
+</div>
+
 <!-- Checkout Modal -->
 <div id="checkoutModal" class="modal-overlay" style="display: none;">
     <div class="modal" style="max-width: 580px;">
@@ -123,21 +173,16 @@
     let currentProduct = null;
     let selectedQuotePrice = 0;
     let selectedArea = null;
+    let isProductOwner = false;
 
     async function loadProductDetail() {
         const container = document.getElementById('productDetailContainer');
         try {
-            const res = await fetch(`${API}/products`);
+            const res = await fetch(`${API}/products/${encodeURIComponent(productId)}`, {
+                headers: token() ? { 'Authorization': `Bearer ${token()}` } : {}
+            });
             if (!res.ok) throw new Error('Gagal memuat katalog produk.');
-            const list = await res.json();
-            const items = list.data || [];
-            
-            // Find current product or fallback
-            currentProduct = items.find(p => String(p.id) === String(productId));
-            if (!currentProduct && items.length > 0) {
-                currentProduct = items[0]; // demo fallback
-            }
-
+            currentProduct = await res.json();
             if (!currentProduct) {
                 container.innerHTML = `
                     <div class="empty-state">
@@ -148,6 +193,19 @@
                     </div>
                 `;
                 return;
+            }
+
+            isProductOwner = false;
+            if (token()) {
+                try {
+                    const profileResponse = await fetch(`${API}/user/profile`, {
+                        headers: { 'Accept': 'application/json', 'Authorization': `Bearer ${token()}` }
+                    });
+                    if (profileResponse.ok) {
+                        const profile = await profileResponse.json();
+                        isProductOwner = Number(profile.id) === Number(currentProduct.user_id);
+                    }
+                } catch (_) {}
             }
 
             document.getElementById('breadcrumbTitle').textContent = currentProduct.title;
@@ -211,6 +269,7 @@
                                 <div>Kondisi Barang: <strong>${conditionLabel}</strong></div>
                                 ${currentProduct.expired_at ? `<div>Tanggal Kedaluwarsa: <strong class="text-warning">${currentProduct.expired_at}</strong></div>` : ''}
                                 <div>Berat Paket Kurir: <strong>${currentProduct.weight_gram || 1000} gram</strong></div>
+                                ${isProductOwner ? `<div>Stok tersedia: <strong>${currentProduct.stock ?? 0}</strong></div>` : ''}
                             </div>
                         </div>
 
@@ -232,18 +291,29 @@
                                     <div class="text-xs text-dim">${escapeHtml(currentProduct.pickup_address || 'Lokasi terverifikasi')}</div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-outline btn-sm" onclick="startDirectChat(${currentProduct.id})">
+                            ${isProductOwner ? '' : `<button type="button" class="btn btn-outline btn-sm" onclick="startDirectChat(${currentProduct.id})">
                                 <i data-lucide="message-circle" style="width: 15px; height: 15px;"></i>
                                 <span>Chat Penjual</span>
-                            </button>
+                            </button>`}
                         </div>
 
                         <!-- Action Buttons -->
                         <div class="flex gap-3 mt-2">
+                            ${isProductOwner ? `
+                            <button type="button" class="btn btn-outline btn-lg flex-1" onclick="openEditProductModal()">
+                                <i data-lucide="pencil" style="width: 18px; height: 18px;"></i>
+                                <span>Edit Postingan</span>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-lg flex-1" onclick="deleteProductPost()">
+                                <i data-lucide="trash-2" style="width: 18px; height: 18px;"></i>
+                                <span>Hapus Postingan</span>
+                            </button>
+                            ` : `
                             <button type="button" class="btn btn-primary btn-lg flex-1" onclick="openCheckoutModal()">
                                 <i data-lucide="shopping-bag" style="width: 18px; height: 18px;"></i>
                                 <span>Beli Sekarang</span>
                             </button>
+                            `}
                         </div>
                     </div>
                 </div>
@@ -266,6 +336,68 @@
         document.querySelectorAll('.upload-thumb').forEach(t => t.style.borderColor = 'var(--clr-border)');
         if (el) el.style.borderColor = 'var(--clr-primary)';
     }
+
+    function openEditProductModal() {
+        if (!isProductOwner || !currentProduct) return;
+        document.getElementById('editProductTitle').value = currentProduct.title || '';
+        document.getElementById('editProductDescription').value = currentProduct.description || '';
+        document.getElementById('editProductPrice').value = currentProduct.seller_price || currentProduct.system_price || '';
+        document.getElementById('editProductStock').value = currentProduct.stock ?? 0;
+        document.getElementById('editProductCondition').value = currentProduct.item_condition || 'like_new';
+        document.getElementById('editConditionGroup').style.display = currentProduct.type === 'food' ? 'none' : 'flex';
+        document.getElementById('editProductPickupAddress').value = currentProduct.pickup_address || '';
+        document.getElementById('editProductWeight').value = currentProduct.weight_gram || 1000;
+        document.getElementById('editProductError').style.display = 'none';
+        document.getElementById('editProductModal').style.display = 'flex';
+    }
+
+    function closeEditProductModal() {
+        document.getElementById('editProductModal').style.display = 'none';
+    }
+
+    async function deleteProductPost() {
+        if (!isProductOwner || !currentProduct || !confirm('Hapus postingan ini beserta foto dan seluruh data terkait?')) return;
+        try {
+            const response = await fetch(`${API}/products/${currentProduct.id}`, {
+                method: 'DELETE',
+                headers: { 'Accept': 'application/json', 'Authorization': `Bearer ${token()}` }
+            });
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok) throw new Error(data.message || 'Postingan belum dapat dihapus.');
+            showToast('Postingan berhasil dihapus.', 'success');
+            window.location.href = '/dashboard/products';
+        } catch (error) {
+            showToast(error.message, 'error');
+        }
+    }
+
+    document.getElementById('editProductForm')?.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!isProductOwner || !currentProduct) return;
+        const button = document.getElementById('saveProductEdit');
+        const errorBox = document.getElementById('editProductError');
+        const payload = Object.fromEntries(new FormData(event.currentTarget));
+        if (currentProduct.type === 'food') payload.item_condition = null;
+        button.disabled = true;
+        errorBox.style.display = 'none';
+        try {
+            const response = await fetch(`${API}/products/${currentProduct.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': `Bearer ${token()}` },
+                body: JSON.stringify(payload)
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.message || Object.values(data.errors || {}).flat().join(' ') || 'Perubahan belum dapat disimpan.');
+            closeEditProductModal();
+            showToast('Postingan berhasil diperbarui.', 'success');
+            await loadProductDetail();
+        } catch (error) {
+            errorBox.textContent = error.message;
+            errorBox.style.display = 'block';
+        } finally {
+            button.disabled = false;
+        }
+    });
 
     function openCheckoutModal() {
         if (!token()) {

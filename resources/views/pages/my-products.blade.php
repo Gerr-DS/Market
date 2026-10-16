@@ -9,7 +9,7 @@
         <div class="flex items-center justify-between mb-6 flex-wrap gap-4">
             <div>
                 <h1 class="text-2xl font-bold">Produk Saya</h1>
-                <p class="text-sm text-muted">Daftar produk yang Anda tawarkan di pasar ReCircle.</p>
+                <p class="text-sm text-muted">Hanya produk yang sudah disetujui dan ditayangkan yang muncul di sini.</p>
             </div>
             <a href="/sell" class="btn btn-primary btn-sm">
                 <i data-lucide="plus-circle" style="width: 15px; height: 15px;"></i>
@@ -27,14 +27,6 @@
             <a href="/dashboard/chat" class="tab">Pesan Chat</a>
         </div>
 
-        <!-- Status Filter Tabs -->
-        <div class="flex gap-2 mb-6">
-            <button type="button" class="category-chip active" onclick="filterMyProducts('all', this)">Semua</button>
-            <button type="button" class="category-chip" onclick="filterMyProducts('active', this)">Ditayangkan</button>
-            <button type="button" class="category-chip" onclick="filterMyProducts('pending_approval', this)">Menunggu Persetujuan</button>
-            <button type="button" class="category-chip" onclick="filterMyProducts('rejected', this)">Ditolak</button>
-        </div>
-
         <!-- Product List Container -->
         <div id="myProductsContainer" class="flex flex-col gap-4">
             <div class="card p-8 flex justify-center items-center">
@@ -48,7 +40,6 @@
 @push('scripts')
 <script>
     let allMyProducts = [];
-    let currentFilter = 'all';
 
     async function loadMyProducts() {
         if (!token()) {
@@ -67,7 +58,7 @@
 
             if (!res.ok) throw new Error('Gagal memuat produk saya.');
             const json = await res.json();
-            allMyProducts = json.data || [];
+            allMyProducts = (json.data || []).filter(p => p.status === 'active');
 
             renderMyProducts();
         } catch (e) {
@@ -83,9 +74,7 @@
 
     function renderMyProducts() {
         const container = document.getElementById('myProductsContainer');
-        const items = currentFilter === 'all' 
-            ? allMyProducts 
-            : allMyProducts.filter(p => p.status === currentFilter);
+        const items = allMyProducts;
 
         if (items.length === 0) {
             container.innerHTML = `
@@ -99,12 +88,6 @@
             return;
         }
 
-        const statusBadges = {
-            active: '<span class="badge badge-success">Ditayangkan</span>',
-            pending_approval: '<span class="badge badge-warning">Menunggu Persetujuan AI</span>',
-            rejected: '<span class="badge badge-danger">Ditolak</span>'
-        };
-
         container.innerHTML = items.map(p => {
             const img = p.images?.[0]?.image_path;
             const photoSrc = imageUrl(img);
@@ -117,54 +100,22 @@
                         <div>
                             <div class="flex items-center gap-2 mb-1">
                                 <span class="badge ${isFood ? 'badge-warning' : 'badge-primary'}">${isFood ? 'Makanan Surplus' : 'Preloved'}</span>
-                                ${statusBadges[p.status] || ''}
+                                <span class="badge badge-success">Ditayangkan</span>
                             </div>
                             <h3 class="font-bold text-base mb-1">${escapeHtml(p.title)}</h3>
                             <div class="text-primary font-bold text-base">${rupiah(p.system_price)}</div>
+                            <div class="text-xs text-muted">Stok: ${Number(p.stock ?? 0)}${Number(p.stock ?? 0) === 0 ? ' · tidak tampil di katalog' : ''}</div>
                         </div>
                     </div>
 
                     <div class="flex items-center gap-2">
                         <a href="/products/${p.id}" class="btn btn-outline btn-sm">Lihat Halaman</a>
-                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteMyProduct(${p.id})">
-                            <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
-                            <span>Hapus</span>
-                        </button>
                     </div>
                 </div>
             `;
         }).join('');
 
         lucide.createIcons();
-    }
-
-    function filterMyProducts(status, btn) {
-        currentFilter = status;
-        document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
-        if (btn) btn.classList.add('active');
-        renderMyProducts();
-    }
-
-    async function deleteMyProduct(id) {
-        if (!confirm('Apakah Anda yakin ingin menghapus produk ini dari etalase?')) return;
-
-        try {
-            const res = await fetch(`${API}/products/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Accept': 'application/json',
-                    'Authorization': `Bearer ${token()}`
-                }
-            });
-
-            if (!res.ok) throw new Error('Gagal menghapus produk.');
-
-            showToast('Produk berhasil dihapus.', 'success');
-            allMyProducts = allMyProducts.filter(p => p.id !== id);
-            renderMyProducts();
-        } catch (e) {
-            showToast(e.message, 'error');
-        }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
